@@ -1,0 +1,60 @@
+
+
+Yana Kraleva <yanakr@yahoo.com>
+To:
+yaanakr@yahoo.com
+
+Thu, Nov 12 at 3:08 PM
+
+###############################################################################
+#  Copyright 2013 - 2018 Software AG, Darmstadt, Germany and/or its licensors
+#
+#   SPDX-License-Identifier: Apache-2.0
+#
+#     Licensed under the Apache License, Version 2.0 (the "License");
+#     you may not use this file except in compliance with the License.
+#     You may obtain a copy of the License at
+#
+#        http://www.apache.org/licenses/LICENSE-2.0
+#
+#     Unless required by applicable law or agreed to in writing, software
+#     distributed under the License is distributed on an "AS IS" BASIS,
+#     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#     See the License for the specific language governing permissions and
+#     limitations under the License.                                                            
+#
+###############################################################################
+version: "3.2"
+
+services:
+  universal-messaging:
+    image: ${LOCAL_REG:-daerepository03.eur.ad.sag:4443/ccdevops}/pcum:${TAG:-10.5}
+    build:
+      context: universal-messaging/
+      args:
+        - PRODUCT_IMAGE=${REG:-store/softwareag}/universalmessaging-server:${UM_TAG:-10.5}
+        - BASE_IMAGE=centos:8
+    ports:
+      - 9000                            # container specific ports
+    hostname: universal-messaging
+
+  microservices-runtime:
+    image: ${LOCAL_REG:-daerepository03.eur.ad.sag:4443/ccdevops}/pcmsr:${TAG:-10.5} 
+    build:
+      context: microservices-runtime/
+      args:
+        - PRODUCT_IMAGE=${REG:-store/softwareag}/webmethods-microservicesruntime:${MSR_TAG:-10.5.0.0}
+        - BASE_IMAGE=centos:8
+    ports:
+      - 5555                            # container specific ports
+    environment:
+      - MSR_JNDI_PROVIDER='nsp://universal-messaging:9000'
+    hostname: microservices-runtime
+
+        
+
+
+
+
+
+
