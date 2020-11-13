@@ -18,14 +18,14 @@ pool:
 
 steps:
 - checkout:  assetRepo
-
+- checkout:  self
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
 - script: |
-    cd ..
+    cd /home/vsts/work/
     pwd 
-    ls -la
+    ls -latR
     env
     echo Add other tasks to build, test, and deploy your project.
     cat ${Build.SourcesDirectory}/containers/docker-compose.yml
