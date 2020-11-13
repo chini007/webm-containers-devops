@@ -16,7 +16,7 @@ steps:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     cat containers/docker-compose.yml
-    docker login -u ${DOCKERUSER} -p ${DOCKERPASS}
+    cat ${DOCKERPASS}| docker login -u ${DOCKERUSER} --password-stdin
   displayName: 'Run a multi-line script'
 
 - task: Docker@2
