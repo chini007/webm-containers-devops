@@ -13,6 +13,7 @@ RUN useradd -u 1724 sagadmin
 EXPOSE 5555
 COPY --from=product_image --chown=1724:1724 /opt/softwareag/ /opt/softwareag/
 COPY --chown=sagadmin ./scripts /src/scripts
+RUN ls -la /src/scripts
 ENV JAVA_HOME=/opt/softwareag/jvm/jvm
 ENV PATH=$JAVA_HOME/bin:$PATH
 
