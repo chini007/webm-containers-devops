@@ -27,7 +27,7 @@ services:
         - PRODUCT_IMAGE=${REG:-store/softwareag}/webmethods-microservicesruntime:${MSR_TAG:-10.5.0.0}
         - BASE_IMAGE=centos:8
     ports:
-      - 5555                            # container specific ports 1
+      - 5555:5555                            # container specific ports 1
     environment:
       - MSR_JNDI_PROVIDER='nsp://universal-messaging:9000'
     hostname: microservices-runtime
