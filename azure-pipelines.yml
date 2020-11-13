@@ -38,13 +38,13 @@ steps:
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Container Registry'
-    dockerComposeFile: '$(Build.SourcesDirectory)/webm-azure-devops/containers/docker-compose.yml'
+    dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'config'
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Container Registry'
-    dockerComposeFile: '$(Build.SourcesDirectory)/webm-azure-devops/containers/docker-compose.yml'
+    dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'build'
     arguments: 'microservices-runtime'
