@@ -3,6 +3,13 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+resources:
+  repositories:
+  - repository: assetRepo # The name used to reference this repository in the checkout step
+    type: github
+    endpoint: YanaSimeonova
+    name: YanaSimeonova/webmethods-sample-project-layout
+
 trigger:
 - master
 
@@ -17,18 +24,11 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     cat containers/docker-compose.yml
   displayName: 'Run a multi-line script'
-  
+- checkout:  assetRepo
 - task: Docker@2
   inputs:
     containerRegistry: 'dockehub'
     command: 'login'
-- task: DownloadGitHubRelease@0
-  inputs:
-    connection: 'YanaSimeonova'
-    userRepository: 'SoftwareAG/webmethods-sample-project-layout'
-    defaultVersionType: 'specificVersion'
-    version: 'master'
-    downloadPath: '$(System.ArtifactsDirectory)'
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Container Registry'
