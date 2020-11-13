@@ -19,9 +19,6 @@ steps:
     docker login -u ${dockeruser} -p ${dockerpass}
   displayName: 'Run a multi-line script'
 
-- task: Docker@2
-  inputs:
-    command: 'login'
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Container Registry'
