@@ -25,7 +25,7 @@ steps:
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
-    cat containers/docker-compose.yml
+    cat $(Build.SourcesDirectory)/containers/docker-compose.yml
   displayName: 'Run a multi-line script'
 
 - task: Docker@2
