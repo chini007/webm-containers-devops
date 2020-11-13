@@ -33,6 +33,6 @@ done
 
 # this is our main container process
 
-echo "Integration Server is ONLINE at http://`hostname`:5555/"
+echo "Integration Server is ONLINE it is at http://`hostname`:5555/"
 
 tail -f /opt/softwareag/IntegrationServer/logs/server.log

@@ -2,7 +2,7 @@ ARG PRODUCT_IMAGE
 ARG BASE_IMAGE
 
 FROM $PRODUCT_IMAGE as product_image
-#copy packages
+#copy packages1
 COPY --chown=sagadmin ./data/AssetPackages/Packages/Fibonachi /opt/softwareag/IntegrationServer/Packages/Fibonachi
 
 RUN ls -la /opt/softwareag/IntegrationServer/
