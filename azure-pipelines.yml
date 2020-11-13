@@ -16,8 +16,12 @@ steps:
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     cat containers/docker-compose.yml
+    docker login -u ${DOCKERUSER} -p ${DOCKERPASS}
   displayName: 'Run a multi-line script'
 
+- task: Docker@2
+  inputs:
+    command: 'login'
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Container Registry'
