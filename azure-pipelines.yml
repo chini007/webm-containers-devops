@@ -28,7 +28,7 @@ steps:
     ls -latR
     env
     echo Add other tasks to build, test, and deploy your project.
-    cat BUILD_SOURCESDIRECTORY/*/containers/docker-compose.yml
+    cat $BUILD_SOURCESDIRECTORY/*/containers/docker-compose.yml
   displayName: 'Run a multi-line script'
 
 - task: Docker@2
@@ -44,7 +44,7 @@ steps:
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Container Registry'
-    dockerComposeFile: 'containers/docker-compose.yml'
+    dockerComposeFile: '$(Build.SourcesDirectory)/webm-azure-devops/containers/docker-compose.yml'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'build'
     arguments: 'microservices-runtime'
