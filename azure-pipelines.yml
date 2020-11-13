@@ -23,5 +23,11 @@ steps:
     containerregistrytype: 'Container Registry'
     dockerComposeFile: 'containers/docker-compose.yml'
     action: 'Run a Docker Compose command'
+    dockerComposeCommand: 'config'
+- task: DockerCompose@0
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerComposeFile: 'containers/docker-compose.yml'
+    action: 'Run a Docker Compose command'
     dockerComposeCommand: 'build'
     arguments: 'microservices-runtime'
