@@ -25,8 +25,9 @@ steps:
 - task: DownloadGitHubRelease@0
   inputs:
     connection: 'YanaSimeonova'
-    userRepository: 'https://github.com/SoftwareAG/webmethods-sample-project-layout.git'
-    defaultVersionType: 'latest'
+    userRepository: 'SoftwareAG/webmethods-sample-project-layout'
+    defaultVersionType: 'specificVersion'
+    version: 'master'
     downloadPath: '$(System.ArtifactsDirectory)'
 - task: DockerCompose@0
   inputs:
