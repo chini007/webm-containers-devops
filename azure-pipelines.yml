@@ -23,8 +23,10 @@ steps:
   displayName: 'Run a one-line script'
 
 - script: |
+    cd ..
     pwd 
     ls -la
+    env
     echo Add other tasks to build, test, and deploy your project.
     cat ${Build.SourcesDirectory}/containers/docker-compose.yml
   displayName: 'Run a multi-line script'
