@@ -27,17 +27,6 @@ Thu, Nov 12 at 3:08 PM
 version: "3.2"
 
 services:
-  universal-messaging:
-    image: ${LOCAL_REG:-daerepository03.eur.ad.sag:4443/ccdevops}/pcum:${TAG:-10.5}
-    build:
-      context: universal-messaging/
-      args:
-        - PRODUCT_IMAGE=${REG:-store/softwareag}/universalmessaging-server:${UM_TAG:-10.5}
-        - BASE_IMAGE=centos:8
-    ports:
-      - 9000                            # container specific ports
-    hostname: universal-messaging
-
   microservices-runtime:
     image: ${LOCAL_REG:-daerepository03.eur.ad.sag:4443/ccdevops}/pcmsr:${TAG:-10.5} 
     build:
