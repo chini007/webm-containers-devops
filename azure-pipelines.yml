@@ -48,3 +48,19 @@ steps:
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'build'
     arguments: 'microservices-runtime'
+- task: DockerCompose@0
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
+    action: 'Run services'
+    buildImages: false
+    arguments: 'microservices-runtime'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      docker ps 
+      until curl -u Administrator:manage -s http://`hostname`:5555/ 
+      do 
+        sleep 5
+      done
