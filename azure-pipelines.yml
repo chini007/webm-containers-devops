@@ -3,13 +3,6 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-#resources:
-#  repositories:
-#  - repository: assetRepo # The name used to reference this repository in the checkout step
-#    type: github
-#    endpoint: YanaSimeonova
-#    name: YanaSimeonova/webmethods-sample-project-layout
-
 trigger:
 - master
 
@@ -17,19 +10,13 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-#- checkout:  assetRepo
-#- checkout:  self
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
 - script: |
     cd containers/microservices-runtime
     git clone https://github.com/YanaSimeonova/webmethods-sample-project-layout.git
-    ls -la
-    pwd
-    echo Add other tasks to build, test, and deploy your project.
-    #cat $BUILD_SOURCESDIRECTORY/*/containers/docker-compose.yml
-  displayName: 'Run a multi-line script'
+  displayName: 'Clone asset repo'
 
 - task: Docker@2
   inputs:
@@ -64,3 +51,4 @@ steps:
       do 
         sleep 5
       done
+  displayName: 'Wait for IS to start'
