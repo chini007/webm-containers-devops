@@ -17,15 +17,16 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- checkout:  self
 - checkout:  assetRepo
 
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
 - script: |
+    pwd 
+    ls -la
     echo Add other tasks to build, test, and deploy your project.
-    cat $(Build.SourcesDirectory)/containers/docker-compose.yml
+    cat ${Build.SourcesDirectory}/containers/docker-compose.yml
   displayName: 'Run a multi-line script'
 
 - task: Docker@2
