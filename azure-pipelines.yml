@@ -46,7 +46,12 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      docker ps 
+      CONTAINER_ID = `docker ps -q`
+      docker exec -it $CONTAINER_ID ls -lR  /opt/softwareag/common/lib
+      #docker cp $CONTAINER_ID:/opt/softwareag/common/lib/ext/enttoolkit.jar . 
+      # docker cp $CONTAINER_ID:/opt/softwareag/common/lib/**/gf.javax.mail.jar . 
+      #docker cp $CONTAINER_ID:/opt/softwareag/common/lib/ext/wm-isclient.jar . 
+      #docker cp $CONTAINER_ID:/opt/softwareag/IntegrationServer/lib/wm-isserver.jar . 
       until curl -u Administrator:manage -s http://`hostname`:5555/ 
       do 
         sleep 5
