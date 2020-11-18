@@ -48,7 +48,7 @@ steps:
     script: |
       CONTAINER_ID=`docker ps -q`
       echo $CONTAINER_ID
-      docker exec -it $CONTAINER_ID ls -lR  /opt/softwareag/common/lib
+      docker exec -t $CONTAINER_ID ls -lR  /opt/softwareag/common/lib
       #docker cp $CONTAINER_ID:/opt/softwareag/common/lib/ext/enttoolkit.jar . 
       # docker cp $CONTAINER_ID:/opt/softwareag/common/lib/**/gf.javax.mail.jar . 
       #docker cp $CONTAINER_ID:/opt/softwareag/common/lib/ext/wm-isclient.jar . 
