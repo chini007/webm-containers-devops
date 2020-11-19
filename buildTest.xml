@@ -14,7 +14,7 @@
 
 	<path id="junitClasspath">
 		<fileset dir="." includes="enttoolkit.jar" />
-		<fileset dir="." includes="glassfish/gf.jakarta.mail.jar" />
+		<fileset dir="." includes="gf.jakarta.mail.jar" />
 		<fileset dir="." includes="wm-isclient.jar" />
 		<fileset dir="." includes="wm-isserver.jar" />
 		<fileset dir="./lib" includes="httpunit.jar" />
@@ -95,6 +95,9 @@
 			<sequential>
 				<basename property="fileBasename" file="@{testSetupFile}" suffix=".xml" />
 				<echo message="Running JUnit test '@{testSetupFile}'"/>
+				<pathconvert property="classpathProp" refid="junitClasspath"/>
+
+				<echo>Classpath is ${classpathProp}</echo>
 				<junit printsummary="yes" haltonfailure="no" fork="true" failureproperty="test:failure" showoutput="true" dir="${testPackageName}">
 					<jvmarg value="-DwebMethods.integrationServer.name=${testISHost}" />
 					<jvmarg value="-DwebMethods.integrationServer.port=${testISPort}" />
