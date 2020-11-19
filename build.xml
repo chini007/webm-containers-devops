@@ -8,17 +8,20 @@
     Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.                                                            
  -->
 
-<project name="Build and Deploy Solution" default="buildDeployTest" basedir="." >
-	<property file="${project.properties}"/>
-	<property file="System.properties"/>
-        
-	<import file="buildTest.xml"/>
+<project name="Test Solution" default="test" basedir="." >       
+    <property name="workspace.dir" location="."/>
+
+    <property name="testDir" location="${testDir}"/>       
+    <property name="buildOutputDir" value="${workspace.dir}/target/${projectName}/build"/>
+    <property name="repositoryName" value="${projectName}Repo"/>
+    <property name="testPackageNamePattern" value="*_Test"/>
+    <property name="reportDir" value="${workspace.dir}/report"/>
 	
+	<import file="buildTest.xml"/>	
 
-	<taskdef classpath="lib/ant-contrib.jar" resource="net/sf/antcontrib/antlib.xml"/>
-				
+	<taskdef classpath="lib/ant-contrib.jar" resource="net/sf/antcontrib/antlib.xml"/>			
 
-    <target name="test" depends="initProject,startTest">
+    <target name="test" depends="startTest">
 		<description>Run tests.</description>
 	</target>	
 	

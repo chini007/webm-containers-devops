@@ -10,7 +10,7 @@
 
 <project name="test" default="startTest" basedir=".">
 
-	<property name="testSuitePackagesPath" value="${isTestDir}"/>
+	<property name="testSuitePackagesPath" value="${testDir}"/>
 
 	<path id="junitClasspath">
 		<fileset dir="." includes="enttoolkit.jar" />
