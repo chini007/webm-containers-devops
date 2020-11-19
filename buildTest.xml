@@ -98,7 +98,7 @@
 				<pathconvert property="classpathProp" refid="junitClasspath"/>
 
 				<echo>Classpath is ${classpathProp}</echo>
-				<junit printsummary="yes" haltonfailure="no" fork="true" failureproperty="test:failure" showoutput="true" dir="${testPackageName}">
+				<junit printsummary="yes" haltonfailure="no" fork="true" failureproperty="test:failure" enabletestlistenerevents="true" showoutput="true" dir="${testPackageName}">
 					<jvmarg value="-DwebMethods.integrationServer.name=${testISHost}" />
 					<jvmarg value="-DwebMethods.integrationServer.port=${testISPort}" />
 					<jvmarg value="-DwebMethods.integrationServer.userid=${testISUsername}" />
