@@ -98,7 +98,7 @@
 				<pathconvert property="classpathProp" refid="junitClasspath"/>
 
 				<echo>Classpath is ${classpathProp}</echo>
-				<junit printsummary="yes" haltonfailure="no" fork="true" debug="true" failureproperty="test:failure" enabletestlistenerevents="true" showoutput="true" dir="${testPackageName}">
+				<junit printsummary="yes" haltonfailure="no" fork="true" failureproperty="test:failure" enabletestlistenerevents="true" dir="${testPackageName}">
 					<jvmarg value="-DwebMethods.integrationServer.name=${testISHost}" />
 					<jvmarg value="-DwebMethods.integrationServer.port=${testISPort}" />
 					<jvmarg value="-DwebMethods.integrationServer.userid=${testISUsername}" />
@@ -109,7 +109,8 @@
 						<path refid="junitClasspath" />
 					</classpath>
 					<formatter type="xml" />
-					<test name="com.wm.ps.test.WmTestSuite" outfile="TEST-${fileBasename}" debug="true" haltonerror="false" enabletestlistenerevents="true" haltonfailure="false" todir="${testPackageReportsDir}" />
+					<formatter type="plain" usefile="false" /> <!-- to screen -->
+					<test name="com.wm.ps.test.WmTestSuite" outfile="TEST-${fileBasename}" haltonerror="false" haltonfailure="false" todir="${testPackageReportsDir}" />
 				</junit>
 				<replaceregexp file="${testPackageReportsDir}/TEST-${fileBasename}.xml" match=" name=&quot;com.wm.ps.test.WmTestSuite&quot; " replace=" name=&quot;com.wm.ps.test.WmTestSuite [${fileBasename}]&quot; " />												
 				<var name="fileBasename" unset="true" />
