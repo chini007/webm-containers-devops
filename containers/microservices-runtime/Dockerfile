@@ -3,7 +3,8 @@ ARG PRODUCT_IMAGE
 FROM $PRODUCT_IMAGE as default
 RUN grep sagadmin /etc/passwd
 RUN cat /etc/os-release
-COPY --chown=sagadmin webmethods-sample-project-layout/assets/IS/Packages/ /opt/softwareag/IntegrationServer/Packages/
+#COPY --chown=sagadmin webmethods-sample-project-layout/assets/IS/Packages/* /opt/softwareag/IntegrationServer/Packages/
+ADD --chown=sagadmin webmethods-sample-project-layout/assets/IS/Packages /opt/softwareag/IntegrationServer/Packages/
 
 RUN ls -la /opt/softwareag/IntegrationServer/Packages/
 
