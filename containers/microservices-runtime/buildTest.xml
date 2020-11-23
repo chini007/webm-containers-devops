@@ -9,10 +9,19 @@
  -->
 
 <project name="test" default="startTest" basedir=".">
-
 	<property name="testSuitePackagesPath" value="${testDir}"/>
-
-	<path id="junitClasspath">
+	
+	<target name="prepareTest" >	
+	  <exec dir="." executable="/bin/sh" osfamily="unix" vmlauncher="false" failonerror="true" >
+			<arg line="./prepareTests.sh" />
+	  </exec>
+	
+	  <waitfor maxwait="3" maxwaitunit="minute" checkevery="500">
+	    <httpbasicauth url="https://${testISHost}:${testISPort}" basicAuth="true" username="${testISUsername}" password="${testISPassword}"/>
+		<http url="https://${testISHost}:${testISPort}"/>
+      </waitfor>
+		
+	  <path id="junitClasspath">
 		<fileset dir="." includes="enttoolkit.jar" />
 		<fileset dir="." includes="gf.jakarta.mail.jar" />
 		<fileset dir="." includes="wm-isclient.jar" />
@@ -22,9 +31,11 @@
 		<fileset dir="./lib" includes="xmlunit*.jar" />
 		<fileset dir="./lib" includes="serviceInterceptor.jar" />
 		<fileset dir="./lib" includes="serviceMockClient.jar" />
-	</path>
+	  </path>
+	</target>	
 	
-	<target name="startTest" >		
+	
+	<target name="startTest" depends="prepareTest" >		
 		<var name="failedTestList" value=""/>
 		
                 <!-- interate over the test project and triiger all xml tests in the setup folder -->
