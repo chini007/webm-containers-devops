@@ -60,7 +60,7 @@
 				<equals arg1="${failedTestList}" arg2="" trim="true" />
 			</not>
 			<then>
-				<echo message="At least one test failed. Failed packages: ${failedTestList}" />
+				<fail message="At least one test failed. Failed packages: ${failedTestList}" />
 			</then>
 			<else>
 				<echo message="All JUnit Tests passed."/>
