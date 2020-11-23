@@ -17,7 +17,7 @@
 	  </exec>
 	
 	  <waitfor maxwait="3" maxwaitunit="minute" checkevery="500">
-	    <httpbasicauth url="https://${testISHost}:${testISPort}" basicAuth="true" username="${testISUsername}" password="${testISPassword}"/>
+	    <http url="https://${testISHost}:${testISPort}"/>
       </waitfor>
 		
 	  <path id="junitClasspath">
