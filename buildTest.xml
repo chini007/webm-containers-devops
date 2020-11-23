@@ -45,7 +45,7 @@
 					</try>
 					<catch>
 						<echo message="JUnit test for package '@{testProject}' failed" />
-						<var name="failedTestList" value="${failedTestList}'@{packageName}', " />
+						<var name="failedTestList" value="${failedTestList}'@{testProject}', " />
 						<property name="testFail" refid="exception_ref" />
 					</catch>
 				</trycatch>
