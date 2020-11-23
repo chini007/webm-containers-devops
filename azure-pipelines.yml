@@ -55,7 +55,7 @@ steps:
 - task: Ant@1
   inputs:
       buildFile: 'build.xml'
-      options: ' -DtestISHost=localhost -DtestObject=microservices-runtime -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DprojectName=webmethods-sample-project-layout -DtestDir=./containers/microservices-runtime/webmethods-sample-project-layout/assets/IS/Tests'
+      options: ' -DtestISHost=localhost -DtestObject=microservices-runtime -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DprojectName=$(projectName) -DtestDir=$(testDir)'
       targets: 'test'
       publishJUnitResults: true
       testResultsFiles: '**/TEST-*.xml'
