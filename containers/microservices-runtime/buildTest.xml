@@ -24,17 +24,8 @@
 	
 	
 	<target name="startTest" depends="prepareTest" >		
-	  <path id="junitClasspath">
-		<fileset dir="." includes="enttoolkit.jar" />
-		<fileset dir="." includes="gf.jakarta.mail.jar" />
-		<fileset dir="." includes="wm-isclient.jar" />
-		<fileset dir="." includes="wm-isserver.jar" />
-		<fileset dir="./lib" includes="httpunit.jar" />
-		<fileset dir="./lib" includes="junit*.jar" />
-		<fileset dir="./lib" includes="xmlunit*.jar" />
-		<fileset dir="./lib" includes="serviceInterceptor.jar" />
-		<fileset dir="./lib" includes="serviceMockClient.jar" />
-	  </path>	
+	  
+	  
 	  <var name="failedTestList" value=""/>
 		
                 <!-- interate over the test project and triiger all xml tests in the setup folder -->
@@ -90,6 +81,18 @@
 	<target name="junitTestAndReportXML" depends="junitInitTest,junitCleanUp">
 		<echo message="Starting JUnit tests for package '${testPackageName}'"/>
 		
+		<path id="junitClasspath">
+			<fileset dir="." includes="enttoolkit.jar" />
+			<fileset dir="." includes="gf.jakarta.mail.jar" />
+			<fileset dir="." includes="wm-isclient.jar" />
+			<fileset dir="." includes="wm-isserver.jar" />
+			<fileset dir="./lib" includes="httpunit.jar" />
+			<fileset dir="./lib" includes="junit*.jar" />
+			<fileset dir="./lib" includes="xmlunit*.jar" />
+			<fileset dir="./lib" includes="serviceInterceptor.jar" />
+			<fileset dir="./lib" includes="serviceMockClient.jar" />
+		</path>	
+	  
 		<mkdir dir="${testPackageReportsDir}" />
 
 		<property name="resourcesFolder" value="${testPackageName}/resources" />
