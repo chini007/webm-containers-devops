@@ -13,15 +13,15 @@
 	<property name="testSuitePackagesPath" value="${testDir}"/>
 
 	<path id="junitClasspath">
-		<fileset dir="../.." includes="enttoolkit.jar" />
-		<fileset dir="../.." includes="gf.jakarta.mail.jar" />
-		<fileset dir="../.." includes="wm-isclient.jar" />
-		<fileset dir="../.." includes="wm-isserver.jar" />
-		<fileset dir="../../lib" includes="httpunit.jar" />
-		<fileset dir="../../lib" includes="junit*.jar" />
-		<fileset dir="../../lib" includes="xmlunit*.jar" />
-		<fileset dir="../../lib" includes="serviceInterceptor.jar" />
-		<fileset dir="../../lib" includes="serviceMockClient.jar" />
+		<fileset dir="." includes="enttoolkit.jar" />
+		<fileset dir="." includes="gf.jakarta.mail.jar" />
+		<fileset dir="." includes="wm-isclient.jar" />
+		<fileset dir="." includes="wm-isserver.jar" />
+		<fileset dir="./lib" includes="httpunit.jar" />
+		<fileset dir="./lib" includes="junit*.jar" />
+		<fileset dir="./lib" includes="xmlunit*.jar" />
+		<fileset dir="./lib" includes="serviceInterceptor.jar" />
+		<fileset dir="./lib" includes="serviceMockClient.jar" />
 	</path>
 	
 	<target name="startTest" >		
