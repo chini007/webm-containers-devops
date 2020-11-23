@@ -20,6 +20,10 @@
 	    <http url="https://${testISHost}:${testISPort}"/>
       </waitfor>
 		
+	</target>	
+	
+	
+	<target name="startTest" depends="prepareTest" >		
 	  <path id="junitClasspath">
 		<fileset dir="." includes="enttoolkit.jar" />
 		<fileset dir="." includes="gf.jakarta.mail.jar" />
@@ -30,12 +34,8 @@
 		<fileset dir="./lib" includes="xmlunit*.jar" />
 		<fileset dir="./lib" includes="serviceInterceptor.jar" />
 		<fileset dir="./lib" includes="serviceMockClient.jar" />
-	  </path>
-	</target>	
-	
-	
-	<target name="startTest" depends="prepareTest" >		
-		<var name="failedTestList" value=""/>
+	  </path>	
+	  <var name="failedTestList" value=""/>
 		
                 <!-- interate over the test project and triiger all xml tests in the setup folder -->
                 <for param="testProject" keepgoing="true" trim="true">
