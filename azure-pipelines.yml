@@ -10,9 +10,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
 - script: |
     cd containers/microservices-runtime
     git clone https://github.com/YanaSimeonova/webmethods-sample-project-layout.git
@@ -22,12 +19,7 @@ steps:
   inputs:
     containerRegistry: 'dockehub'
     command: 'login'
-- task: DockerCompose@0
-  inputs:
-    containerregistrytype: 'Container Registry'
-    dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
-    action: 'Run a Docker Compose command'
-    dockerComposeCommand: 'config'
+  displayName: 'Docker login'
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Container Registry'
@@ -35,6 +27,7 @@ steps:
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'build'
     arguments: 'microservices-runtime'
+  displayName: 'Build'  
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Container Registry'
@@ -42,6 +35,7 @@ steps:
     action: 'Run services'
     buildImages: false
     arguments: 'microservices-runtime'
+  displayName: 'Run'    
 - task: Bash@3
   inputs:
     targetType: 'inline'
@@ -52,13 +46,7 @@ steps:
       docker cp $CONTAINER_ID:/opt/softwareag/common/lib/glassfish/gf.jakarta.mail.jar .
       docker cp $CONTAINER_ID:/opt/softwareag/common/lib/wm-isclient.jar .
       docker cp $CONTAINER_ID:/opt/softwareag/IntegrationServer/lib/wm-isserver.jar .
-      pwd
-      ls -lR
-      until curl -u Administrator:manage -s http://`hostname`:5555/ 
-      do 
-        sleep 5
-      done
-  displayName: 'Wait for IS to start'
+  displayName: 'Prepare for testing'
 - task: Ant@1
   inputs:
       buildFile: 'build.xml'
@@ -67,3 +55,4 @@ steps:
       publishJUnitResults: true
       testResultsFiles: '**/TEST-*.xml'
       javaHomeOption: 'JDKVersion'
+  displayName: 'Test'
