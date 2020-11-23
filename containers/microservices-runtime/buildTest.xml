@@ -12,7 +12,7 @@
 	<property name="testSuitePackagesPath" value="${testDir}"/>
 	
 	<target name="prepareTest" >	
-	  <exec dir="." executable="/bin/sh" osfamily="unix" vmlauncher="false" failonerror="true" >
+	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/sh" osfamily="unix" vmlauncher="false" failonerror="true" >
 			<arg line="./prepareTests.sh" />
 	  </exec>
 	
