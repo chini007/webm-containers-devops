@@ -82,10 +82,10 @@
 		<echo message="Starting JUnit tests for package '${testPackageName}'"/>
 		
 		<path id="junitClasspath">
-			<fileset dir="." includes="enttoolkit.jar" />
-			<fileset dir="." includes="gf.jakarta.mail.jar" />
-			<fileset dir="." includes="wm-isclient.jar" />
-			<fileset dir="." includes="wm-isserver.jar" />
+			<fileset dir="./lib" includes="enttoolkit.jar" />
+			<fileset dir="./lib" includes="gf.jakarta.mail.jar" />
+			<fileset dir="./lib" includes="wm-isclient.jar" />
+			<fileset dir="./lib" includes="wm-isserver.jar" />
 			<fileset dir="./lib" includes="httpunit.jar" />
 			<fileset dir="./lib" includes="junit*.jar" />
 			<fileset dir="./lib" includes="xmlunit*.jar" />
