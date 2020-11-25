@@ -4,22 +4,22 @@
 	<property name="testSuitePackagesPath" value="${testDir}"/>
 	
 	<target name="prepareTest" >	
-	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/sh" osfamily="unix" vmlauncher="false" failonerror="true" >
+	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
 			<!--<arg line="./prepareTests.sh" />-->
 			<arg line="/usr/bin/docker cp $( docker ps -q | grep xxx ):/opt/softwareag/common/lib/ext/enttoolkit.jar ../../lib" />
 	  </exec>
 	  
-	  	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/sh" osfamily="unix" vmlauncher="false" failonerror="true" >
+	  	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
 			<!--<arg line="./prepareTests.sh" />-->
 			<arg line="/usr/bin/docker cp $( docker ps -q | grep xxx ):/opt/softwareag/common/lib/glassfish/gf.jakarta.mail.jar ../../lib" />
 	  </exec>
 	  
-	  	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/sh" osfamily="unix" vmlauncher="false" failonerror="true" >
+	  	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
 			<!--<arg line="./prepareTests.sh" />-->
 			<arg line="/usr/bin/docker cp $( docker ps -q | grep xxx ):/opt/softwareag/common/lib/wm-isclient.jar ../../lib" />
 	  </exec>
 	  
-	  	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/sh" osfamily="unix" vmlauncher="false" failonerror="true" >
+	  	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
 			<!--<arg line="./prepareTests.sh" />-->
 			<arg line="/usr/bin/docker cp $( docker ps -q | grep xxx ):/opt/softwareag/IntegrationServer/lib/wm-isserver.jar ../../lib" />
 	  </exec>
