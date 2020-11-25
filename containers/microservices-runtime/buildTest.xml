@@ -1,20 +1,29 @@
 <?xml version="1.0"?>
-<!--
-    Copyright © 2018 Software AG, Darmstadt, Germany and/or its licensors
-    SPDX-License-Identifier: Apache-2.0
-    Licensed under the Apache License, Version 2.0 (the "License");
-    You may not use this file except in compliance with the License.
-    You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
-    Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.                                                            
- -->
 
 <project name="test" default="startTest" basedir=".">
 	<property name="testSuitePackagesPath" value="${testDir}"/>
 	
 	<target name="prepareTest" >	
 	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/sh" osfamily="unix" vmlauncher="false" failonerror="true" >
-			<arg line="./prepareTests.sh" />
+			<!--<arg line="./prepareTests.sh" />-->
+			<arg line="docker cp $( docker ps -q | grep xxx ):/opt/softwareag/common/lib/ext/enttoolkit.jar ../../lib" />
 	  </exec>
+	  
+	  	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/sh" osfamily="unix" vmlauncher="false" failonerror="true" >
+			<!--<arg line="./prepareTests.sh" />-->
+			<arg line="docker cp $( docker ps -q | grep xxx ):/opt/softwareag/common/lib/glassfish/gf.jakarta.mail.jar ../../lib" />
+	  </exec>
+	  
+	  	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/sh" osfamily="unix" vmlauncher="false" failonerror="true" >
+			<!--<arg line="./prepareTests.sh" />-->
+			<arg line="docker cp $( docker ps -q | grep xxx ):/opt/softwareag/common/lib/wm-isclient.jar ../../lib" />
+	  </exec>
+	  
+	  	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/sh" osfamily="unix" vmlauncher="false" failonerror="true" >
+			<!--<arg line="./prepareTests.sh" />-->
+			<arg line="docker cp $( docker ps -q | grep xxx ):/opt/softwareag/IntegrationServer/lib/wm-isserver.jar ../../lib" />
+	  </exec>
+	  
 	
 	  <waitfor maxwait="3" maxwaitunit="minute" checkevery="500">
 	    <http url="https://${testISHost}:${testISPort}"/>
@@ -82,15 +91,7 @@
 		<echo message="Starting JUnit tests for package '${testPackageName}'"/>
 		
 		<path id="junitClasspath">
-			<fileset dir="./lib" includes="enttoolkit.jar" />
-			<fileset dir="./lib" includes="gf.jakarta.mail.jar" />
-			<fileset dir="./lib" includes="wm-isclient.jar" />
-			<fileset dir="./lib" includes="wm-isserver.jar" />
-			<fileset dir="./lib" includes="httpunit.jar" />
-			<fileset dir="./lib" includes="junit*.jar" />
-			<fileset dir="./lib" includes="xmlunit*.jar" />
-			<fileset dir="./lib" includes="serviceInterceptor.jar" />
-			<fileset dir="./lib" includes="serviceMockClient.jar" />
+			<fileset dir="./lib" includes="*.jar" />
 		</path>	
 	  
 		<mkdir dir="${testPackageReportsDir}" />
@@ -99,7 +100,6 @@
 		
 		<for param="testSetupFile" keepgoing="true">
 			<path>
-				<!--fileset dir="${testPackageXmlDir}" includes="*.xml" /-->
 				<fileset dir="${testPackageName}" includes="**/setup/*.xml" />
 			</path>
 			<sequential>
@@ -114,7 +114,6 @@
 					<jvmarg value="-DwebMethods.integrationServer.userid=${testISUsername}" />
 					<jvmarg value="-DwebMethods.integrationServer.password=${testISPassword}" />
 					<jvmarg value="-DwebMethods.test.setup.filename=@{testSetupFile}" />
-					<!--jvmarg value="-Dresources.folder=${resourcesFolder}" /-->
 					<classpath>
 						<path refid="junitClasspath" />
 					</classpath>
