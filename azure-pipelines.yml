@@ -59,4 +59,3 @@ steps:
     containerregistrytype: 'Azure Container Registry'
     dockerComposeFile: '**/docker-compose.yml'
     action: 'Push services'
-    arguments: '$(testObject)'
