@@ -58,4 +58,5 @@ steps:
   inputs:
     containerregistrytype: 'Azure Container Registry'
     dockerComposeFile: '**/docker-compose.yml'
+    dockerComposeFileArgs: 'LOCAL_REG=letswebmacr/ccdevops'
     action: 'Push services'
