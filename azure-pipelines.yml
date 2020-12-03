@@ -1,5 +1,5 @@
 variables:
-  testObject: 'microservice-runtime'
+  testObject: 'microservices-runtime'
   gitProject: 'https://github.com/YanaSimeonova/webmethods-sample-project-layout.git'
   testDir: './containers/microservices-runtime/webmethods-sample-project-layout/assets/IS/Tests'
   projectName: 'webmethods-sample-project-layout'
