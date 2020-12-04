@@ -1,12 +1,12 @@
 variables:
-  container: 'microservices-runtime'
+  dockerComposeService: 'microservices-runtime'
   gitProject: 'https://github.com/YanaSimeonova/webmethods-sample-project-layout.git'
   dockerRegistryConnection: 'az-reg-sc-01'
   dockerRegistry: 'letswebmacr.azurecr.io/ccdevops'
   baseDockerRegistryConnection: 'dockehub'
   testDir: './containers/microservices-runtime/webmethods-sample-project-layout/assets/IS/Tests'
   projectName: 'webmethods-sample-project-layout'
-  testProperties: ' -DtestISHost=localhost -DtestObject=$(container) -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DprojectName=$(projectName) -DtestDir=$(testDir)'
+  testProperties: ' -DtestISHost=localhost -DtestObject=$(dockerComposeService) -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DprojectName=$(projectName) -DtestDir=$(testDir)'
 trigger:
 - master
 
@@ -15,7 +15,7 @@ pool:
 
 steps:
 - script: |
-    cd containers/$(container)
+    cd containers/$(dockerComposeService)
     git clone $(gitProject)
   displayName: 'Clone asset repo'
 
@@ -31,7 +31,7 @@ steps:
     dockerComposeFileArgs: 'LOCAL_REG=$(dockerRegistry)'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'build'
-    arguments: '$(container)'
+    arguments: '$(dockerComposeService)'
   displayName: 'Build'  
 
 - task: DockerCompose@0
@@ -41,7 +41,7 @@ steps:
     dockerComposeFileArgs: 'LOCAL_REG=$(dockerRegistry)'
     action: 'Run services'
     buildImages: false
-    arguments: '$(container)'
+    arguments: '$(dockerComposeService)'
   displayName: 'Run'    
 
 - task: Ant@1
