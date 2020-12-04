@@ -60,4 +60,5 @@ steps:
     dockerComposeFile: '**/docker-compose.yml'
     dockerComposeFileArgs: 'LOCAL_REG=$(dockerRegistry)'
     action: 'Push services'
+    arguments: '$(testObject)'
   displayName: 'Push' 
