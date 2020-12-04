@@ -25,18 +25,22 @@ steps:
   inputs:
     containerregistrytype: 'Container Registry'
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
+    dockerComposeFileArgs: 'LOCAL_REG=letswebmacr.azurecr.io/ccdevops'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'build'
     arguments: '$(testObject)'
   displayName: 'Build'  
+
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Container Registry'
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
+    dockerComposeFileArgs: 'LOCAL_REG=letswebmacr.azurecr.io/ccdevops'
     action: 'Run services'
     buildImages: false
     arguments: '$(testObject)'
   displayName: 'Run'    
+
 - task: Bash@3
   inputs:
     targetType: 'inline'
