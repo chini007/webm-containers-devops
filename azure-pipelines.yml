@@ -27,7 +27,7 @@ steps:
   inputs:
     containerregistrytype: 'Container Registry'
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
-    dockerComposeFileArgs: 'LOCAL_REG=letswebmacr.azurecr.io/ccdevops'
+    dockerComposeFileArgs: 'LOCAL_REG=$(dockerRegistry)'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'build'
     arguments: '$(testObject)'
@@ -37,20 +37,12 @@ steps:
   inputs:
     containerregistrytype: 'Container Registry'
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
-    dockerComposeFileArgs: 'LOCAL_REG=letswebmacr.azurecr.io/ccdevops'
+    dockerComposeFileArgs: 'LOCAL_REG=$(dockerRegistry)'
     action: 'Run services'
     buildImages: false
     arguments: '$(testObject)'
   displayName: 'Run'    
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      which docker
-
-     
-  displayName: 'Prepare for testing'
 - task: Ant@1
   inputs:
       buildFile: 'build.xml'
@@ -60,6 +52,7 @@ steps:
       testResultsFiles: '**/TEST-*.xml'
       javaHomeOption: 'JDKVersion'
   displayName: 'Test'
+  
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Container Registry'
@@ -67,3 +60,4 @@ steps:
     dockerComposeFile: '**/docker-compose.yml'
     dockerComposeFileArgs: 'LOCAL_REG=$(dockerRegistry)'
     action: 'Push services'
+  displayName: 'Push' 
