@@ -56,7 +56,8 @@ steps:
   displayName: 'Test'
 - task: DockerCompose@0
   inputs:
-    containerregistrytype: 'Azure Container Registry'
+    containerregistrytype: 'Container Registry'
+    dockerRegistryEndpoint: 'az-reg-sc-01'
     dockerComposeFile: '**/docker-compose.yml'
-    dockerComposeFileArgs: 'LOCAL_REG=letswebmacr/ccdevops'
+    dockerComposeFileArgs: 'LOCAL_REG=letswebmacr.azurecr.io/ccdevops'
     action: 'Push services'
