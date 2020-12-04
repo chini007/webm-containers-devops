@@ -1,6 +1,8 @@
 variables:
   testObject: 'microservices-runtime'
   gitProject: 'https://github.com/YanaSimeonova/webmethods-sample-project-layout.git'
+  dockerRegistry: 'az-reg-sc-01'
+  localRegistry: 'letswebmacr.azurecr.io/ccdevops'
   testDir: './containers/microservices-runtime/webmethods-sample-project-layout/assets/IS/Tests'
   projectName: 'webmethods-sample-project-layout'
   testProperties: ' -DtestISHost=localhost -DtestObject=$(testObject) -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DprojectName=$(projectName) -DtestDir=$(testDir)'
@@ -61,7 +63,7 @@ steps:
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Container Registry'
-    dockerRegistryEndpoint: 'az-reg-sc-01'
+    dockerRegistryEndpoint: '$(dockerRegistry)'
     dockerComposeFile: '**/docker-compose.yml'
-    dockerComposeFileArgs: 'LOCAL_REG=letswebmacr.azurecr.io/ccdevops'
+    dockerComposeFileArgs: '$(localRegistry)'
     action: 'Push services'
