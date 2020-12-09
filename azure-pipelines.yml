@@ -1,5 +1,5 @@
 variables:
-  dockerComposeService: 'amicroservices-runtime'
+  dockerComposeService: 'microservices-runtime'
   gitProject: 'https://github.com/YanaSimeonova/webmethods-sample-project-layout.git'
   dockerRegistryConnection: 'az-reg-sc-01'
   dockerRegistry: 'letswebmacr.azurecr.io/ccdevops'
