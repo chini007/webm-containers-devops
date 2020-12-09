@@ -28,7 +28,7 @@ steps:
   inputs:
     containerregistrytype: 'Container Registry'
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
-    dockerComposeFileArgs: 'LOCAL_REG=$(dockerRegistry)'
+    dockerComposeFileArgs: 'LOCAL_REG=$(dockerRegistry) IMAGE_TAG=$(Build.DefinitionName)'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'build'
     arguments: '$(dockerComposeService)'
@@ -38,7 +38,7 @@ steps:
   inputs:
     containerregistrytype: 'Container Registry'
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
-    dockerComposeFileArgs: 'LOCAL_REG=$(dockerRegistry)'
+    dockerComposeFileArgs: 'LOCAL_REG=$(dockerRegistry) IMAGE_TAG=$(Build.DefinitionName)'
     action: 'Run services'
     buildImages: false
     arguments: '$(dockerComposeService)'
@@ -59,6 +59,6 @@ steps:
     containerregistrytype: 'Container Registry'
     dockerRegistryEndpoint: '$(dockerRegistryConnection)'
     dockerComposeFile: '**/docker-compose.yml'
-    dockerComposeFileArgs: 'LOCAL_REG=$(dockerRegistry)'
+    dockerComposeFileArgs: 'LOCAL_REG=$(dockerRegistry) IMAGE_TAG=$(Build.DefinitionName)'
     action: 'Push services'
   displayName: 'Push' 
