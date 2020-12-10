@@ -33,7 +33,7 @@ steps:
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
     dockerComposeFileArgs: |
       LOCAL_REG=$(dockerRegistry)
-      IMAGE=$(Build.DefinitionName)
+      IMAGE=$(Build.BuildNumber)
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'build'
     arguments: '$(dockerComposeService)'
