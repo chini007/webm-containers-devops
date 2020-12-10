@@ -31,7 +31,7 @@ steps:
     targetType: 'inline'
     script: |
         # Write your commands here
-        sleep 10
+        until docker info; do sleep 5; done
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Container Registry'
