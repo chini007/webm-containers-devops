@@ -20,7 +20,7 @@ version: "3.2"
 
 services:
   microservices-runtime:
-    image: ${LOCAL_REG:-daerepository03.eur.ad.sag:4443/ccdevops}/${IMAGE_TAG:-pcmsr}:${VERSION_TAG:-10.5} 
+    image: ${LOCAL_REG:-daerepository03.eur.ad.sag:4443/ccdevops}/${IMAGE:-pcmsr}:${TAG:-10.5} 
     build:
       context: microservices-runtime/
       args:
