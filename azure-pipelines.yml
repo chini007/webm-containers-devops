@@ -30,7 +30,7 @@ steps:
       echo '$(Build.DefinitionName)'
       echo $(Build.DefinitionName)
       echo $(Build.BuildNumber)
-      export IMAGE_NAME=`echo $(Build.DefinitionName) | tr -d ".1234567890-"`
+      export IMAGE_NAME=${`echo $(Build.DefinitionName) | tr -d ".1234567890-"`,,}
       echo $IMAGE_NAME
 - task: Docker@2
   inputs:
