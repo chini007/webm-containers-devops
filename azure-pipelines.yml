@@ -46,8 +46,8 @@ steps:
       LOCAL_REG=$(dockerRegistry)
       IMAGE=$IMAGE_NAME
     action: 'Run a Docker Compose command'
-    dockerComposeCommand: 'build'
-    #dockerComposeCommand: 'config'
+    #dockerComposeCommand: 'build'
+    dockerComposeCommand: 'config'
     arguments: '$(dockerComposeService)'
   displayName: 'Build'  
 
