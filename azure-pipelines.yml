@@ -32,6 +32,7 @@ steps:
     script: |
         # Write your commands here
         until docker info; do sleep 5; done
+        systemctl restart docker
         export DOCKER_HOST=127.0.0.1
         env
 - task: DockerCompose@0
