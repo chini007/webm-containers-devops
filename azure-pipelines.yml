@@ -30,6 +30,8 @@ steps:
       echo '$(Build.DefinitionName)'
       echo $(Build.DefinitionName)
       echo $(Build.BuildNumber)
+      export IMAGE_NAME=`echo $(Build.DefinitionName)| tr -d "-_.0123456789"`
+      echo $IMAGE_
 - task: Docker@2
   inputs:
     containerRegistry: '$(baseDockerRegistryConnection)'
@@ -42,7 +44,7 @@ steps:
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
     dockerComposeFileArgs: |
       LOCAL_REG=$(dockerRegistry)
-      IMAGE='yansimeonovawebm-azure-devops-1'
+      IMAGE=$IMAGE_NAME
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'build'
     #dockerComposeCommand: 'config'
