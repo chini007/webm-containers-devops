@@ -44,7 +44,6 @@ steps:
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
     dockerComposeFileArgs: |
       LOCAL_REG=$(dockerRegistry)
-      IMAGE=$(IMAGE_NAME)
     action: 'Run a Docker Compose command'
     #dockerComposeCommand: 'build'
     dockerComposeCommand: 'config'
