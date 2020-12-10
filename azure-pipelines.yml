@@ -4,7 +4,7 @@ variables:
   dockerRegistryConnection: 'az-reg-sc-01'
   dockerRegistry: 'letswebmacr.azurecr.io/ccdevops'
  # imageTag: '$(Build.DefinitionName)'
-    imageTag: 'pcmsr'
+  imageTag: 'pcmsr'
   baseDockerRegistryConnection: 'dockehub'
   testDir: './containers/microservices-runtime/webmethods-sample-project-layout/assets/IS/Tests'
   projectName: 'webmethods-sample-project-layout'
