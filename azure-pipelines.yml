@@ -42,7 +42,7 @@ steps:
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
     dockerComposeFileArgs: |
       LOCAL_REG=$(dockerRegistry)
-      IMAGE='yanasimeonova.webm-azure-devops-1'
+      IMAGE='yansimeonovawebm-azure-devops-1'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'build'
     #dockerComposeCommand: 'config'
