@@ -39,7 +39,7 @@ steps:
   inputs:
     containerregistrytype: 'Container Registry'
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
-    dockerComposeFileArgs: 'LOCAL_REG=$(dockerRegistry) IMAGE=$(image)'
+    dockerComposeFileArgs: 'LOCAL_REG=$(dockerRegistry)'
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'build'
     arguments: '$(dockerComposeService)'
