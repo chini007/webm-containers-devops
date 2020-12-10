@@ -42,9 +42,10 @@ steps:
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
     dockerComposeFileArgs: |
       LOCAL_REG=$(dockerRegistry)
-      IMAGE='webm-azure-devops-1'
+      IMAGE=$(Build.DefinitionName)
     action: 'Run a Docker Compose command'
-    dockerComposeCommand: 'build'
+   # dockerComposeCommand: 'build'
+    dockerComposeCommand: 'config'
     arguments: '$(dockerComposeService)'
   displayName: 'Build'  
 
