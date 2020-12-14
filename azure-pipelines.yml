@@ -4,7 +4,7 @@ variables:
   dockerRegistryConnection: 'az-reg-sc-01'
   dockerRegistry: 'letswebmacr.azurecr.io/ccdevops'
   #image: '$(Build.DefinitionName)'
-  image: 'pcmsr-1'
+  image: 'yanasimeonovawebm-azure-devops_microservices-runtime'
   baseDockerRegistryConnection: 'dockehub'
   testDir: './containers/microservices-runtime/webmethods-sample-project-layout/assets/IS/Tests'
   projectName: 'webmethods-sample-project-layout'
@@ -44,7 +44,7 @@ steps:
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
     dockerComposeFileArgs: |
       LOCAL_REG=$(dockerRegistry)
-      image=yanasimeonovawebmazuredevops
+      IMAGE=$(image)
     action: 'Run a Docker Compose command'
     #dockerComposeCommand: 'build'
     dockerComposeCommand: 'config'
