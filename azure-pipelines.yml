@@ -44,7 +44,7 @@ steps:
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
     dockerComposeFileArgs: |
       LOCAL_REG=$(dockerRegistry)
-      IMAGE=$(image)
+      IMAGE_NAME=$(image)
     action: 'Run a Docker Compose command'
     #dockerComposeCommand: 'build'
     dockerComposeCommand: 'config'
@@ -57,7 +57,7 @@ steps:
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
     dockerComposeFileArgs: |
       LOCAL_REG=$(dockerRegistry)
-      IMAGE=$(image)
+      IMAGE_NAME=$(image)
     action: 'Run services'
     buildImages: false
     arguments: '$(dockerComposeService)'
@@ -80,6 +80,6 @@ steps:
     dockerComposeFile: '**/docker-compose.yml'
     dockerComposeFileArgs: |
       LOCAL_REG=$(dockerRegistry)
-      IMAGE=$(image)
+      IMAGE_NAME=$(image)
     action: 'Push services'
   displayName: 'Push' 
