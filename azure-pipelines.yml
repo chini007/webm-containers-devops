@@ -3,7 +3,6 @@ variables:
   gitProject: 'https://github.com/YanaSimeonova/webmethods-sample-project-layout.git'
   dockerRegistryConnection: 'az-reg-sc-01'
   dockerRegistry: 'letswebmacr.azurecr.io/ccdevops'
-  #image: '$(Build.DefinitionName)'
   image: 'yanasimeonovawebm-azure-devops_microservices-runtime'
   baseDockerRegistryConnection: 'dockehub'
   testDir: './containers/microservices-runtime/webmethods-sample-project-layout/assets/IS/Tests'
@@ -21,17 +20,6 @@ steps:
     git clone $(gitProject)
   displayName: 'Clone asset repo'
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      # Write your commands here
-      
-      echo '$(Build.DefinitionName)'
-      echo $(Build.DefinitionName)
-      echo $(Build.BuildNumber)
-      export IMAGE_NAME=`echo $(Build.DefinitionName) | tr -d ".1234567890-"| tr "[A-Z]" "[a-z]"`
-      echo $IMAGE_NAME
 - task: Docker@2
   inputs:
     containerRegistry: '$(baseDockerRegistryConnection)'
