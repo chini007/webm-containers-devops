@@ -16,21 +16,21 @@ Prerequisites:
  - select existing azure pipeline
  
  2. Configure pipelines variables to use your custom values
- The path to the github project with the assets and tests:
+  - The path to the github project with the assets and tests:
   gitProject: 'https://github.com/YanaSimeonova/webmethods-sample-project-layout.git'
- The connection to docker registry from pre-requisite 4 
+   - The connection to docker registry from pre-requisite 4 
   dockerRegistryConnection: 'az-reg-sc-01'
- The docker registry to push the image to:
+  - The docker registry to push the image to:
   dockerRegistry: 'letswebmacr.azurecr.io/ccdevops'
- The image will be taged with: 
+  - The image will be taged with: 
   image: 'yanasimeonovawebm-azure-devops_microservices-runtime'
- The connection to docker hub, created in the pre-requisite 3 
+  - The connection to docker hub, created in the pre-requisite 3 
   baseDockerRegistryConnection: 'dockehub'
- The path to the tests to be executed: 
+  - The path to the tests to be executed: 
   testDir: './containers/microservices-runtime/webmethods-sample-project-layout/assets/IS/Tests'
- The project name: 
+  - The project name: 
   projectName: 'webmethods-sample-project-layout'
- Test properties: 
+  - Test properties: 
   testProperties: ' -DtestISHost=localhost -DtestObject=$(dockerComposeService) -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DprojectName=$(projectName) -DtestDir=$(testDir)'
 
 
