@@ -1,19 +1,32 @@
 # webm-azure-devops
 Creating a pipeline project for building, testing and deploying a docker image
 
-Prerequisites:
-0. Create a project with the format as 'https://github.com/YanaSimeonova/webmethods-sample-project-layout.git'. It will contain the assets to import in the image (packages) and tests to validate if they are fine.
+Pre-requisites:
+1.  Create a github project with the same format as 'https://github.com/YanaSimeonova/webmethods-sample-project-layout.git'. 
+    It will contain:
+  - assets(packages) to import in MSR image 
+  - tests to validate that the assets are working as expected
+2. Log into  docker hub and checkout the MSR image. You have to accept the license agreement.
+3. Log in https://dev.azure.com/ 
+4.	Create a new project
+5. Create a github connection to the current repository
+From "Project settigns" -> "GitHub connections create a GitHub connection to the current repository"
+6. Create a service connection to docker hub registry (it will be used for pulling the base images)
+From "Project settings" -> "Service connection" -> "Choose Docker Registry" -> "Select docker hub" -> provide your docker hub credentials -> give the connection a proper name like "dockerHub". 
+Note: Step 2 should be done as a pre-requisite to this step. 
 
-1. Log in https://dev.azure.com/
-2. Create a github connection to the current repository
-3. Create a service connection to docker hub registry (it will be used for pulling the base images)
-4. Create a service connection to a docker registry which will be used to push the images to.
+6. Create a service connection to a docker registry which will be used to push the images to.
+Same as point 3, but this is the target connection. If you don't have one use the one from azure
+Guide how to achieve it can be found here
+https://portal.azure.com/#create/hub
+If using the Azure Container Registry - from the Docker registry connection tab from step 3, pick Azure Registry. Note! It takes Azure time to refresh the systems and show the registry created outside of AzureDevOps.
 
-
+Creating and running the pipeline steps:
 1. Create a new pipeline 
- - select github yaml for your code base
- - select the current repository
- - select existing azure pipeline
+ -> Select github yaml for your code base
+ -> Select the current repository
+ -> Select existing azure pipeline
+ Note: Run the pipeline once to just have save it and then be able to reconfigure it.
  
  2. Configure pipelines variables to use your custom values
   - The path to the github project with the assets and tests:
