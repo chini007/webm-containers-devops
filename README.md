@@ -26,7 +26,7 @@ Creating and running the pipeline steps:
  -> Select github yaml for your code base
  -> Select the current repository
  -> Select existing azure pipeline
- Note: Run the pipeline once to just have save it and then be able to reconfigure it.
+ Note: Save the pipeline (Click on arrow on button Run -> button Save will appear) and then you will be able to reconfigure it.
  
  2. Configure pipelines variables to use your custom values
   - The path to the github project with the assets and tests:
