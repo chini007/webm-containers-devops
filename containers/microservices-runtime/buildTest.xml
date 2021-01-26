@@ -14,7 +14,7 @@
         <xmlproperty file="${basedir}/maven-metadata.xml" keepRoot="false"
              semanticAttributes="true"/>
         <echo message="latest ivy version is: ${versioning.latest}"/>
-        <get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${versioning.latest}.jar"
+        <get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${versioning.latest}/ivy-${versioning.latest}.jar"
              dest="${ivy.jar.file}" usetimestamp="true"/>
     </target>
 
