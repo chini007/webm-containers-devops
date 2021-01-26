@@ -79,7 +79,7 @@ steps:
 - task: DockerCompose@0
   inputs:
     containerregistrytype: 'Container Registry'
-    dockerRegistryEndpoint: '$(dockerRegistryConnection)'
+    dockerRegistryEndpoint: '$(targetDockerRegistryConnection)'
     dockerComposeFile: '**/docker-compose.yml'
     dockerComposeFileArgs: |
       REG_HOST=$(sourceDockerRegistryHost)
