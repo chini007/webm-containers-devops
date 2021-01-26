@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="test" default="startTest" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">>
+<project name="test" default="startTest" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 	<property name="testSuitePackagesPath" value="${testDir}"/>
 	
 	<property name="ivy.install.version" value="2.1.0-rc2" />
