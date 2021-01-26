@@ -20,11 +20,11 @@ version: "3.2"
 
 services:
   microservices-runtime:
-    image: ${LOCAL_REG:-daerepository03.eur.ad.sag:4443/ccdevops}/${IMAGE_NAME:-pcmsr}:${TAG:-10.5} 
+    image: ${TARGET_REG_HOST}/${TARGET_REG_ORG}/${TARGET_REPO_NAME}:${TARGET_REPO_TAG:-10.5} 
     build:
       context: microservices-runtime/
       args:
-        - PRODUCT_IMAGE=${REG:-store/softwareag}/webmethods-microservicesruntime:${MSR_TAG:-10.5.0.0}
+        - PRODUCT_IMAGE=${REG_HOST:-docker.io}/${REG_ORG:-store/softwareag}/${REPO_NAME:-webmethods-microservicesruntime}:${REPO_TAG:-10.5.0.0}
         - BASE_IMAGE=centos:8
     ports:
       - 5555:5555                            # container specific ports 1
@@ -32,7 +32,6 @@ services:
       - MSR_JNDI_PROVIDER='nsp://universal-messaging:9000'
     hostname: microservices-runtime
 
-        
 
 
 
