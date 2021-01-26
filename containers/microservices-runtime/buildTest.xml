@@ -10,7 +10,7 @@
 
     <target name="download-ivy" unless="offline">
         <mkdir dir="${ivy.jar.dir}"/>
-        <get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/maven-metadata.xml" dest="${basedir}maven-metadata.xml"/>
+        <get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/maven-metadata.xml" dest="${basedir}/maven-metadata.xml"/>
         <xmlproperty file="${basedir}/maven-metadata.xml" keepRoot="false"
              semanticAttributes="true"/>
         <echo message="latest ivy version is: ${versioning.latest}"/>
