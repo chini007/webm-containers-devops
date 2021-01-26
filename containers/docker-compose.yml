@@ -24,7 +24,7 @@ services:
     build:
       context: microservices-runtime/
       args:
-        - PRODUCT_IMAGE='store/softwareag/webmethods-microservicesruntime:10.5.0.0'
+        - PRODUCT_IMAGE=store/softwareag/webmethods-microservicesruntime:10.5.0.0
         - BASE_IMAGE=centos:8
     ports:
       - 5555:5555                            # container specific ports 1
