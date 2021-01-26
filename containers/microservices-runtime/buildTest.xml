@@ -1,11 +1,42 @@
 <?xml version="1.0"?>
 
-<project name="test" default="startTest" basedir=".">
+<project name="test" default="startTest" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">>
 	<property name="testSuitePackagesPath" value="${testDir}"/>
 	
-	<target name="prepareTest" >	
+	<property name="ivy.install.version" value="2.1.0-rc2" />
+    <property name="ivy.home" value="${user.home}/.ant" />
+    <property name="ivy.jar.dir" value="${ivy.home}/lib" />
+    <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
+
+    <target name="download-ivy" unless="offline">
+        <mkdir dir="${ivy.jar.dir}"/>
+        <get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/maven-metadata.xml" dest="/home/bis/delme/maven-metadata.xml"/>
+        <xmlproperty file="/home/bis/delme/maven-metadata.xml" keepRoot="false"
+             semanticAttributes="true"/>
+        <echo message="latest ivy version is: ${versioning.latest}"/>
+        <get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${ivy.install.version}/ivy-${versioning.latest}.jar"
+             dest="${ivy.jar.file}" usetimestamp="true"/>
+    </target>
+
+    <target name="init-ivy" depends="download-ivy">
+        <path id="ivy.lib.path">
+            <fileset dir="${ivy.jar.dir}" includes="*.jar"/>
+        </path>
+        <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
+    </target>
+	
+	<target name="ivy-retrieve-artifacts" description="Retrieve artifacts" depends="init-ivy">
+		<property name="ivy.lib.dir" value="../../lib"/>
+		<ivy:configure file="ivysettings.xml" settingsId="ivy.artifacts"/>
+		<ivy:resolve file="ivy.xml" settingsRef="ivy.artifacts" resolveMode="dynamic"/>
+		<ivy:retrieve settingsRef="ivy.artifacts"/>
+	</target>
+
+	<target name="prepareTest" >
+	
+	  <antcall target="ivy-retrieve-artifacts"/>
+	  
 	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
-			<!--<arg line="./prepareTests.sh" />-->
 			<arg value="-c" />
 			<arg value="docker cp $( docker ps -q ):/opt/softwareag/common/lib/ext/enttoolkit.jar ../../lib" />
 	  </exec>
@@ -38,8 +69,8 @@
 	  
 	  <var name="failedTestList" value=""/>
 		
-                <!-- interate over the test project and triiger all xml tests in the setup folder -->
-                <for param="testProject" keepgoing="true" trim="true">
+            <!-- interate over the test project and triiger all xml tests in the setup folder -->
+            <for param="testProject" keepgoing="true" trim="true">
 			<path>
 				<dirset dir="${testSuitePackagesPath}" includes="*" excludes=".*,replicate" />
 			</path>
@@ -90,7 +121,7 @@
 	<!--execute only if the XML Test directory exists in the test package -->
 	<target name="junitTestAndReportXML" depends="junitInitTest,junitCleanUp">
 		<echo message="Starting JUnit tests for package '${testPackageName}'"/>
-		
+        
 		<path id="junitClasspath">
 			<fileset dir="./lib" includes="*.jar" />
 		</path>	
