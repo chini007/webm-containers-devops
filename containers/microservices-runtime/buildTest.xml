@@ -26,9 +26,9 @@
     </target>
 	
 	<target name="ivy-retrieve-artifacts" description="Retrieve artifacts" depends="init-ivy">
-		<property name="ivy.lib.dir" value="../../lib"/>
-		<ivy:configure file="ivysettings.xml" settingsId="ivy.artifacts"/>
-		<ivy:resolve file="ivy.xml" settingsRef="ivy.artifacts" resolveMode="dynamic"/>
+		<property name="ivy.lib.dir" value="./lib"/>
+		<ivy:configure file="${basedir}/containers/microservices-runtime/ivysettings.xml" settingsId="ivy.artifacts"/>
+		<ivy:resolve file="${basedir}/containers/microservices-runtime/ivy.xml" settingsRef="ivy.artifacts" resolveMode="dynamic"/>
 		<ivy:retrieve settingsRef="ivy.artifacts"/>
 	</target>
 
