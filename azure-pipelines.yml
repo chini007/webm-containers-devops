@@ -35,10 +35,10 @@ steps:
     containerregistrytype: 'Container Registry'
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
     dockerComposeFileArgs: |
-      REG_HOST=$(sourceDockerRegistryHost)
-      REG_ORG=${sourceDockerRegistryOrg}
-      REPO_NAME=$(sourceDockerRepoName)
-      REPO_TAG=$(sourceDockerRepoTag)
+      REG_HOST='docker.io'
+      REG_ORG='store/softwareag'
+      REPO_NAME='webmethods-microservicesruntime'
+      REPO_TAG='10.5.0.0'
       TARGET_REG_HOST=$(targetDockerRegistryHost)
       TARGET_REG_ORG=$(targetDockerRegistryOrg)
       TARGET_REPO_NAME=$(targetDockerRepoName)
