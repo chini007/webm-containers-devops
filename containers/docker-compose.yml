@@ -20,7 +20,7 @@ version: "3.2"
 
 services:
   microservices-runtime:
-    image: letswebmacr.azurecr.io/ccdevops/yanasimeonovawebm-azure-devops_microservices-runtime:10.5
+    image: ${TARGET_REG_HOST:-letswebmacr.azurecr.io}/${TARGET_REG_ORG:-ccdevops}/${TARGET_REPO_NAME:-yanasimeonovawebm-azure-devops_microservices-runtime}:${TARGET_REPO_TAG:-10.5}
     build:
       context: microservices-runtime/
       args:
@@ -31,7 +31,6 @@ services:
     environment:
       - MSR_JNDI_PROVIDER='nsp://universal-messaging:9000'
     hostname: microservices-runtime
-
 
 
 

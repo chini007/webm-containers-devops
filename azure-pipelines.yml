@@ -13,7 +13,7 @@ variables:
   sourceDockerRepoName: 'webmethods-microservicesruntime'
   sourceDockerRepoTag: '10.5.0.0'
 
-  testDir: './containers/microservices-runtime/assets/IS/Tests'
+  testDir: './containers/microservices-runtime/assets/Tests'
   testProperties: ' -DtestISHost=localhost -DtestObject=$(dockerComposeService) -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DtestDir=$(testDir)'
 
 trigger:
@@ -39,10 +39,10 @@ steps:
       REG_ORG=store/softwareag
       REPO_NAME=webmethods-microservicesruntime
       REPO_TAG=10.5.0.0
-      TARGET_REG_HOST='letswebmacr.azurecr.io'
-      TARGET_REG_ORG='ccdevops'
-      TARGET_REPO_NAME='yanasimeonovawebm-azure-devops_microservices-runtime'
-      TARGET_REPO_TAG='10.5'
+      TARGET_REG_HOST=letswebmacr.azurecr.io
+      TARGET_REG_ORG=ccdevops
+      TARGET_REPO_NAME=yanasimeonovawebm-azure-devops_microservices-runtime
+      TARGET_REPO_TAG=10.5
     action: 'Run a Docker Compose command'
     dockerComposeCommand: 'build'
     arguments: '$(dockerComposeService)'
