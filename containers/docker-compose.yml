@@ -24,16 +24,13 @@ services:
     build:
       context: microservices-runtime/
       args:
-        - PRODUCT_IMAGE=${REG_HOST:-docker.io}/store/softwareag/webmethods-microservicesruntime:10.5.0.0
+        - PRODUCT_IMAGE=${REG_HOST:-docker.io}/${REG_ORG:-store/softwareag}/${REPO_NAME:-webmethods-microservicesruntime}:${REPO_TAG:-10.5.0.0}
         - BASE_IMAGE=centos:8
     ports:
       - 5555:5555                            # container specific ports 1
     environment:
       - MSR_JNDI_PROVIDER='nsp://universal-messaging:9000'
     hostname: microservices-runtime
-
-
-
 
 
 

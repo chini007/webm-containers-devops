@@ -36,9 +36,9 @@ steps:
     dockerComposeFile: '$(Build.SourcesDirectory)/containers/docker-compose.yml'
     dockerComposeFileArgs: |
       REG_HOST=docker.io
-      REG_ORG='store/softwareag'
-      REPO_NAME='webmethods-microservicesruntime'
-      REPO_TAG='10.5.0.0'
+      REG_ORG=store/softwareag
+      REPO_NAME=webmethods-microservicesruntime
+      REPO_TAG=10.5.0.0
       TARGET_REG_HOST='letswebmacr.azurecr.io'
       TARGET_REG_ORG='ccdevops'
       TARGET_REPO_NAME='yanasimeonovawebm-azure-devops_microservices-runtime'
