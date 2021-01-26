@@ -20,11 +20,11 @@ version: "3.2"
 
 services:
   microservices-runtime:
-    image: 'letswebmacr.azurecr.io/ccdevops/yanasimeonovawebm-azure-devops_microservices-runtime:10.5'
+    image: letswebmacr.azurecr.io/ccdevops/yanasimeonovawebm-azure-devops_microservices-runtime:10.5
     build:
       context: microservices-runtime/
       args:
-        - PRODUCT_IMAGE=store/softwareag/webmethods-microservicesruntime:10.5.0.0
+        - PRODUCT_IMAGE=docker.io/store/softwareag/webmethods-microservicesruntime:10.5.0.0
         - BASE_IMAGE=centos:8
     ports:
       - 5555:5555                            # container specific ports 1
