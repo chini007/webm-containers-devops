@@ -1,7 +1,7 @@
 ARG PRODUCT_IMAGE
 
 FROM $PRODUCT_IMAGE as default
-COPY --chown=sagadmin containers/microservices-runtime/assets/IS/Packages /opt/softwareag/IntegrationServer/packages/
+COPY --chown=sagadmin containers/microservices-runtime/assets/Packages /opt/softwareag/IntegrationServer/packages/
 RUN ls -la /opt/softwareag/IntegrationServer/packages/
 
 EXPOSE 5555
