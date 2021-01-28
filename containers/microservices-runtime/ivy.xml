@@ -2,7 +2,7 @@
     <info organisation="softwareag" module="webm-devops"/>
 
     <dependencies>
-        <dependency org="ant-contrib" name="ant-contrib" rev="1.0b3"/>
+     <!--   <dependency org="ant-contrib" name="ant-contrib" rev="1.0b3"/> -->
 		<dependency org="httpunit" name="httpunit" rev="1.7"/>
 		<dependency org="junit" name="junit" rev="4.8.2"/>
 		<dependency org="xmlunit" name="xmlunit" rev="1.0"/>
