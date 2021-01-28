@@ -3,7 +3,7 @@
     <resolvers>
         <ibiblio name="central" m2compatible="true"/>
         <filesystem name="local">
-            <artifact pattern="./lib/[artifact]-[revision].[ext]"/>
+            <artifact pattern="${basedir}/lib/[artifact]-[revision].[ext]"/>
         </filesystem>
     </resolvers>
 </ivysettings>
