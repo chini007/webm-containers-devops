@@ -20,7 +20,7 @@ version: "3.2"
 
 services:
   microservices-runtime:
-    image: ${TARGET_REG_HOST:-letswebmacr.azurecr.io}/${TARGET_REG_ORG:-ccdevops}/${TARGET_REPO_NAME:-yanasimeonovawebm-azure-devops_microservices-runtime}:${TARGET_REPO_TAG:-10.5}
+    image: ${TARGET_REG_HOST}/${TARGET_REG_ORG}/${TARGET_REPO_NAME}:${TARGET_REPO_TAG}
     build:
       context: microservices-runtime/
       args:
@@ -28,8 +28,6 @@ services:
         - BASE_IMAGE=centos:8
     ports:
       - 5555:5555                            # container specific ports 1
-    environment:
-      - MSR_JNDI_PROVIDER='nsp://universal-messaging:9000'
     hostname: microservices-runtime
 
 
