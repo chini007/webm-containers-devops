@@ -2,8 +2,6 @@
 Creating a pipeline project for building, testing and deploying a docker image
 
 Pre-requisites:
-1.This sample webMethods project layout should serve as a template for organising webMethods projects. It contains demo Integration Server packages with flow services and wM Unit Tests that are covering those.
-Fork the repository to easily create fundament for you webMethods project.
 1.  Fork the current github project
 2.  In directory containers\microservices-runtime\assets\Packages place Integration Server packages which you would like to import in MSR image
 3.  In directory containers\microservices-runtime\assets\Tests place wM Unit Tests to validate the packages
@@ -56,7 +54,7 @@ Creating and running the pipeline steps:
   - testProperties - the properties required by the tests: 
    testProperties: ' -DtestISHost=localhost -DtestObject=$(dockerComposeService) -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DtestDir=$(testDir)'
 
-Note: You can change the properties values also from Azure pipeline edit page from Variable button.
+Note: You can change the variables values also from Azure pipeline edit page from Variable button.
 
 3. Run the pipeline.
 
