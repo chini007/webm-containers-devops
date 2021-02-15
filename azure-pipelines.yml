@@ -1,12 +1,12 @@
 variables:
   dockerComposeService: 'microservices-runtime'
   
-  targetDockerRegistryConnection: 'az-reg-sc-01'
-  targetDockerRegistryHost: 'letswebmacr.azurecr.io'
-  targetDockerRegistryOrg: 'ccdevops'
-  targetDockerRepoName: 'yanasimeonovawebm-azure-devops_microservices-runtime'
-  targetDockerRepoTag:  '10.5'
-  
+  targetDockerRegistryConnection: ''
+  targetDockerRegistryHost: ''
+  targetDockerRegistryOrg: ''
+  targetDockerRepoName: ''
+  targetDockerRepoTag:  ''
+
   sourceDockerRegistryConnection: 'dockehub'
   sourceDockerRegistryHost:  'docker.io'
   sourceDockerRegistryOrg: 'store/softwareag'
