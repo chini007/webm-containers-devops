@@ -22,13 +22,6 @@ pipeline {
       TARGET_REPO_TAG='$targetDockerRepoTag'
     }
     stages {
-        stage('Checkout') {
-            steps {
-              timeout(time:2, unit:'MINUTES') {
-                   	checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CheckoutOption', timeout: 20],[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false], [$class: 'CloneOption', depth: 0, noTags: false, reference: '', shallow: false, timeout: 20]], submoduleCfg: [], userRemoteConfigs: [[url: 'http://github.com/YanaSimeonova/webm-azure-devops.git']]])  
-                }
-            }
-        }
         stage('Build') {
             steps {
                 script {
