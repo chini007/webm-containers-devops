@@ -1,12 +1,6 @@
 variables:
   dockerComposeService: 'microservices-runtime'
   
-  targetDockerRegistryConnection: ''
-  targetDockerRegistryHost: ''
-  targetDockerRegistryOrg: ''
-  targetDockerRepoName: ''
-  targetDockerRepoTag:  ''
-
   sourceDockerRegistryConnection: 'dockehub'
   sourceDockerRegistryHost:  'docker.io'
   sourceDockerRegistryOrg: 'store/softwareag'
