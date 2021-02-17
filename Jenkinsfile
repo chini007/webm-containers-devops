@@ -42,7 +42,7 @@ pipeline {
         stage('Run') {
             steps {
                 script {
-                     sh "docker-compose -f containers/docker-compose.yml run"
+                     sh "docker-compose -f containers/docker-compose.yml run microservices-runtime"
                 }
             }
         }
