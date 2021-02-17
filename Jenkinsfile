@@ -57,6 +57,7 @@ pipeline {
                     junit "**/TEST-*.xml"
                 }
             }
-		}
+		  }
+        }
     }
 }
