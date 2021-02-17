@@ -50,7 +50,8 @@ pipeline {
 		stage('Test') {
 		   steps {
 		        script {
-                    sh 'ant -file build.xml test ${params.testProperties}' 
+		            sh " echo ${params.testProperties}"
+                    sh "ant -file build.xml test ${params.testProperties}" 
                 }
             post {
                 always {
