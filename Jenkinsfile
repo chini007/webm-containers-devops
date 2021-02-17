@@ -12,7 +12,7 @@ pipeline {
         string(name: 'sourceDockerRegistryOrg', defaultValue: 'store/softwareag', description: 'SOurce registry organization') 
         string(name: 'sourceDockerRepoName', defaultValue: 'webmethods-microservicesruntime', description: 'Source docker repo name') 
         string(name: 'sourceDockerRepoTag', defaultValue: '10.5.0.0', description: 'Source docker repo tag') 
-		string(name: 'testProperties', defaultValue: ' -DtestISHost=localhost -DtestObject=microservices-runtime -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DtestDir=./containers/microservices-runtime/assets/Test', description: 'test properties')
+		string(name: 'testProperties', defaultValue: ' -DtestISHost=localhost -DtestObject=microservices-runtime -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DtestDir=./containers/microservices-runtime/assets/Tests', description: 'test properties')
     }
     environment {
       REG_HOST="${params.sourceDockerRegistryHost}"
@@ -43,7 +43,7 @@ pipeline {
         stage('Run') {
             steps {
                 script {
-                     sh "docker-compose -f containers/docker-compose.yml up -d microservices-runtime"
+                     sh "docker-compose -f containers/docker-compose.yml up -d --force-recreate --remove-orphans microservices-runtime"
                 }
             }
         }
