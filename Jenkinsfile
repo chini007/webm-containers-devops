@@ -53,7 +53,7 @@ pipeline {
 		            sh " echo ${params.testProperties}"
                     sh "/opt/apache-ant-1.9.15/bin/ant -file build.xml test ${params.testProperties}" 
                 }
-                dir('./reports') {
+                dir('./report') {
                     junit '*.xml'
                 }
             }
