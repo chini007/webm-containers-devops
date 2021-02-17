@@ -47,16 +47,16 @@ pipeline {
                 }
             }
         }
-		
-		steps {
-                timeout(time:30, unit:'MINUTES') {
+		stage('Test') {
+		   steps {
+		        script {
                     sh 'ant -file build.xml test ${params.testProperties}' 
                 }
-            }
             post {
                 always {
                     junit "**/TEST-*.xml"
                 }
             }
+		}
     }
 }
