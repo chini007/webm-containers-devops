@@ -51,7 +51,7 @@ pipeline {
 		   steps {
 		        script {
 		            sh " echo ${params.testProperties}"
-                    sh "ant -file build.xml test ${params.testProperties}" 
+                    sh "/opt/apache-ant-1.9.15/bin/ant -file build.xml test ${params.testProperties}" 
                 }
             post {
                 always {
