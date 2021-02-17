@@ -17,7 +17,7 @@ pipeline {
       REG_HOST="${params.sourceDockerRegistryHost}"
       REG_ORG="${params.sourceDockerRegistryOrg}"
       REPO_NAME="${params.sourceDockerRepoName}"
-      REPO_TAG="${params.$sourceDockerRepoTag}"
+      REPO_TAG="${params.sourceDockerRepoTag}"
       TARGET_REG_HOST="${params.targetDockerRegistryHost}"
       TARGET_REG_ORG="${params.targetDockerRegistryOrg}"
       TARGET_REPO_NAME="${params.targetDockerRepoName}"
