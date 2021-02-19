@@ -9,7 +9,7 @@ pipeline {
         string(name: 'sourceDockerRepoTag', defaultValue: '10.5.0.0', description: 'Source docker repo tag') 
 		
         string(name: 'targetDockerRegistryHost', defaultValue: 'daerepository03.eur.ad.sag:4443', description: 'Target registry host') 
-        string(name: 'targetDockerRegistryOrg', defaultValue: 'sagdevops', description: 'Target registry organization') 
+        string(name: 'targetDockerRegistryOrg', defaultValue: 'ccdevops', description: 'Target registry organization') 
         string(name: 'targetDockerRepoName', defaultValue: 'webmethods-microservicesruntime', description: 'Target docker repo name') 
         string(name: 'targetDockerRepoTag', defaultValue: '10.5.0.0', description: 'Target docker repo tag') 
 		string(name: 'targetDockerRegistryCredentials', defaultValue: '', description: 'Target docker registry credentials') 
