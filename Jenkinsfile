@@ -64,7 +64,7 @@ pipeline {
 		stage("Push") {
             steps {
                 script {
-                        docker.withRegistry("${params.targetDockerRegistryHost}", "${params.targetDockerRegistryCredentials}"){
+                        docker.withRegistry("https://${params.targetDockerRegistryHost}", "${params.targetDockerRegistryCredentials}"){
                         	sh "docker-compose push microservices-runtime"
                         }
                 }
