@@ -1,17 +1,20 @@
 pipeline {
     agent { label 'docker1' }
     parameters {
-	    string(name: 'username', defaultValue: '', description: 'Username') 
-		string(name: 'password', defaultValue: '', description: 'password') 
+	    string(name: 'sourceDockerRegistryLoginUser', defaultValue: '', description: 'Username') 
+		password(name: 'sourceDockerRegistryLoginPassword', defaultValue: '', description: 'password') 
+		string(name: 'sourceDockerRegistryHost', defaultValue: 'docker.io', description: 'Source registry host') 
+        string(name: 'sourceDockerRegistryOrg', defaultValue: 'store/softwareag', description: 'SOurce registry organization') 
+        string(name: 'sourceDockerRepoName', defaultValue: 'webmethods-microservicesruntime', description: 'Source docker repo name') 
+        string(name: 'sourceDockerRepoTag', defaultValue: '10.5.0.0', description: 'Source docker repo tag') 
+		
         string(name: 'targetDockerRegistryHost', defaultValue: 'daerepository03.eur.ad.sag:4443', description: 'Target registry host') 
         string(name: 'targetDockerRegistryOrg', defaultValue: 'sagdevops', description: 'Target registry organization') 
         string(name: 'targetDockerRepoName', defaultValue: 'webmethods-microservicesruntime', description: 'Target docker repo name') 
         string(name: 'targetDockerRepoTag', defaultValue: '10.5.0.0', description: 'Target docker repo tag') 
+		string(name: 'targetDockerRegistryCredentials', defaultValue: '', description: 'Target docker registry credentials') 
 
-        string(name: 'sourceDockerRegistryHost', defaultValue: 'docker.io', description: 'Source registry host') 
-        string(name: 'sourceDockerRegistryOrg', defaultValue: 'store/softwareag', description: 'SOurce registry organization') 
-        string(name: 'sourceDockerRepoName', defaultValue: 'webmethods-microservicesruntime', description: 'Source docker repo name') 
-        string(name: 'sourceDockerRepoTag', defaultValue: '10.5.0.0', description: 'Source docker repo tag') 
+       
 		string(name: 'testProperties', defaultValue: ' -DtestISHost=localhost -DtestObject=microservices-runtime -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DtestDir=./containers/microservices-runtime/assets/Tests', description: 'test properties')
     }
     environment {
@@ -28,7 +31,7 @@ pipeline {
         stage('docker login') {
             steps{
                 script {
-                  sh "echo ${params.password} | docker login -u ${params.username} --password-stdin $REG_HOST"
+                  sh "echo ${params.sourceDockerRegistryLoginPassword} | docker login -u ${params.sourceDockerRegistryLoginUser} --password-stdin $REG_HOST"
                 }
             }
         }
@@ -55,6 +58,17 @@ pipeline {
                 }
                 dir('./report') {
                     junit '*.xml'
+                }
+            }
+        }
+		stage("Push") {
+            steps {
+                script {
+                        script{
+                                docker.withRegistry("${params.targetDockerRegistryHost}", "${params.targetDockerRegistryCredentials"}){
+                        			sh "docker-compose push microservices-runtime"
+                                }
+                    } 
                 }
             }
         }
