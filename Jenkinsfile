@@ -34,8 +34,8 @@ pipeline {
                 script {
 				   dir ('./containers') {
                         docker.withRegistry("https://${params.sourceDockerRegistryHost}", "${params.sourceDockerRegistryCredentials}"){
-							sh "docker-compose -f docker-compose.yml config"
-							sh "docker-compose -f docker-compose.yml build"
+							sh "docker-compose config"
+							sh "docker-compose build"
 						}
 					}	
                 }
@@ -46,7 +46,7 @@ pipeline {
                 script {
 					dir ('./containers') {
                         docker.withRegistry("https://${params.sourceDockerRegistryHost}", "${params.sourceDockerRegistryCredentials}"){
-							sh "docker-compose -f containers/docker-compose.yml up -d --force-recreate --remove-orphans microservices-runtime"
+							sh "docker-compose up -d --force-recreate --remove-orphans microservices-runtime"
 						}
 					}	
                 }
