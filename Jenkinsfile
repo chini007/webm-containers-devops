@@ -40,9 +40,9 @@ pipeline {
                 script {
                     sh "docker-compose -f containers/docker-compose.yml config"
                     sh "docker-compose -f containers/docker-compose.yml build"
-                    }
                 }
             }
+        }
         stage('Run') {
             steps {
                 script {
@@ -64,7 +64,7 @@ pipeline {
 		stage("Push") {
             steps {
                 script {
-                        docker.withRegistry("${params.targetDockerRegistryHost}", "${params.targetDockerRegistryCredentials"}){
+                        docker.withRegistry("${params.targetDockerRegistryHost}", "${params.targetDockerRegistryCredentials}"){
                         	sh "docker-compose push microservices-runtime"
                         }
                 }
