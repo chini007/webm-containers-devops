@@ -34,7 +34,7 @@ pipeline {
                 script {
                   dir ('./containers') {
                         docker.withRegistry("https://${params.sourceDockerRegistryHost}", "${params.sourceDockerRegistryCredentials}"){
-                            sh "docker-compose config ${params.dockerComposeService}"
+                            sh "docker-compose config"
                             sh "docker-compose build ${params.dockerComposeService}"
                         }
                   }
