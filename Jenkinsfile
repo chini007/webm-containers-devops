@@ -1,6 +1,7 @@
 pipeline {
     agent { label 'docker1' }
     parameters {
+        string(name: 'dockerComposeService', defaultValue: 'microservices-runtime', description: 'Service to be build and pushed')
         string(name: 'targetDockerRegistryCredentials', defaultValue: '', description: 'Target docker registry credentials') 
         string(name: 'sourceDockerRegistryCredentials', defaultValue: '', description: 'Source docker registry credentials') 
 
@@ -13,7 +14,8 @@ pipeline {
         string(name: 'targetDockerRegistryOrg', defaultValue: 'ccdevops', description: 'Target registry organization') 
         string(name: 'targetDockerRepoName', defaultValue: 'webmethods-microservicesruntime', description: 'Target docker repo name') 
         string(name: 'targetDockerRepoTag', defaultValue: '10.5.0.0', description: 'Target docker repo tag') 
-        
+        booleanParam(name: 'runTests', defaultValue: true, description: 'Whether to run test stage')
+
         string(name: 'testProperties', defaultValue: ' -DtestISHost=localhost -DtestObject=microservices-runtime -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DtestDir=./containers/microservices-runtime/assets/Tests', description: 'test properties')
     }
     environment {
@@ -32,8 +34,8 @@ pipeline {
                 script {
                   dir ('./containers') {
                         docker.withRegistry("https://${params.sourceDockerRegistryHost}", "${params.sourceDockerRegistryCredentials}"){
-                            sh "docker-compose config"
-                            sh "docker-compose build"
+                            sh "docker-compose config ${params.dockerComposeService}"
+                            sh "docker-compose build ${params.dockerComposeService}"
                         }
                   }
                 }
@@ -44,13 +46,18 @@ pipeline {
                 script {
                   dir ('./containers') {
                         docker.withRegistry("https://${params.sourceDockerRegistryHost}", "${params.sourceDockerRegistryCredentials}"){
-                            sh "docker-compose up -d --force-recreate --remove-orphans microservices-runtime"
+                            sh "docker-compose up -d --force-recreate --remove-orphans ${params.dockerComposeService}"
                         }
                     }
                 }
             }
         }
         stage('Test') {
+            when {
+                expression {
+                    return params.runTests
+                }
+            }
             steps {
                 script {
                     sh "/opt/apache-ant-1.9.15/bin/ant -file build.xml test ${params.testProperties}" 
@@ -65,7 +72,7 @@ pipeline {
                 script {
                     dir ('./containers') {
                         docker.withRegistry("https://${params.targetDockerRegistryHost}", "${params.targetDockerRegistryCredentials}"){
-                            sh "docker-compose push microservices-runtime"
+                            sh "docker-compose push ${params.dockerComposeService}"
                         }
                     }
                 }
