@@ -1,16 +1,46 @@
 # webm-containers-devops
 Use this project to create as example for bringing solutions into containers. This repository provides sample on how to run the CI/CD process on Jenskins and Azure DevOps pipelines. It demonstrates building, testing, and uploading a container images based on webMethods products - Microservices Runtime and Universal Messaging.
+The general approach is the following - the pipeline are pulling product images. We call those source images. The default values point to the softwareag official images on docker hub, but you can change it to any images you've created on your own from your own container repository. The build phase will unite the assets from the repository itself with the source images. Those solution images(images with solution on top of them) will be then started as containers and any available tests will be run against them. If the tests are successfull, the resulting images will be promoted to the target container registry. This promoted image will be considered ready for further usage in orchestration.
 
 # Working with wM assets
 1. Fork this repository.
 2. Add asses on the designated place.
 3. MSR - addd packages under containers\microservices-runtime\assets\Packages directory. Add configuration template under FILL HERE. Add the webMethods Unit Tests to validate the packages in the containers\microservices-runtime\assets\Tests directory.
 4. UM - add an export of the UM real(generated from the Enterprise manager tool) under containers/universal-messaging/data/ as a file called config.xml.
-5. Log in Docker Hub (https://hub.docker.com/) and checkout the MSR image and the UM image if you're using them for the sample. Accept the license agreement. If you plan to use different 
+5. If you'll be using the default SAG images, log in Docker Hub (https://hub.docker.com/) and checkout the MSR image and the UM image. Accept the license agreement. If you plan to use different.
 
 
 # Jenkins Pipeline
 
+1. Create a jenkins pipeline that points to the Jenkins file in this git repository. You'll need separate pipelines for every type of container - MSR or UM.
+2. Run the pipeline once to checkout the metadata.
+3. Go and define in Jenkins your credentials for connection with the source and the target repository. Note the aliases as they would be used in the next steps.
+4. Configure the parameters to build a desired solution
+  - `buildScenario` chose which container to to build with assets. The available options are "microservices-runtime" and "universal-messaging"
+
+  - `targetContainerRegistryCredentials`  Provide target container registry credential alias that you've defined in the previous step.
+  
+  - `sourceContainerRegistryCredentials`  Provide source container registry credential alias that you've defined in the previous step.
+  
+  - `sourceContainerRegistryHost` Provide the source registry host. Example 'docker.io'
+  
+  - `sourceContainerRegistryOrg` Provide the source registry organization. Example 'store/softwareag'
+  
+  - `sourceContainerName` Provide source container name. Example 'universalmessaging-server'
+  
+  - `sourceContainerTag` ProvideSource container tag. Example '10.5.0.4'
+  
+  - `targetContainerRegistryHost` Provide target registry host. Example 'docker.io'
+  
+  - `targetContainerRegistryOrg` Provide target registry organization. Example 'myorg/mysolution'
+  
+  - `targetContainerName` Provide target image name. Example "um_integration"
+  
+  - `targetContainerTag` Provide target image tag. Example "v1"
+  
+  - `runTests` Define whether to run test stage for your containers. This is valuable with MSR, where you can create and put tests that will test the solution image in isolation. We have not way to test UM assets. The default value is "true". Jenkins renders it as a checkbox.
+  
+5. Run the pipeline to validate your inputs. The pipeline is all green, query the target container repository to see your solution image. You can pull it and use it
 
 
 ## Azure DevOps Pipeline
@@ -36,9 +66,9 @@ Use this project to create as example for bringing solutions into containers. Th
 - existing Azure pipeline
 
  **Note:** To save the pipeline, click the arrow on the **Run** button and **Save**. After saving the pipeline, you can manage the pipeline configuration.
- 
- 2. Configure the pipelines variables to use your custom values:
-   - `targetDockerRegistryConnection` - the connection to the docker registry to which to push the image.
+
+2. Configure the pipelines variables to use your custom values:
+  - `targetDockerRegistryConnection` - the connection to the docker registry to which to push the image.
    Example: `targetDockerRegistryConnection: 'az-reg-sc-01'`
   - `targetDockerRegistryHost` - the host (and port if needed) of the docker registry to which to push the image.
   Example: `targetDockerRegistryHost: 'letswebmacr.azurecr.io'`
