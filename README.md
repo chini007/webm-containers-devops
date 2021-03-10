@@ -1,25 +1,35 @@
-# webm-azure-devops
-Use this project to create an Azure pipeline for building, testing, and deploying a docker image of webMethods Microservices Runtime.
+# webm-containers-devops
+Use this project to create as example for bringing solutions into containers. This repository provides sample on how to run the CI/CD process on Jenskins and Azure DevOps pipelines. It demonstrates building, testing, and uploading a container images based on webMethods products - Microservices Runtime and Universal Messaging.
 
-## Prerequisites
-1.  Fork this repository.
-2.  Add the Integration Server packages that you want to import in the Microservices Runtime (MSR) image in the containers\microservices-runtime\assets\Packages directory.
-3.  Add the webMethods Unit Tests to validate the packages in the containers\microservices-runtime\assets\Tests directory.
-4. Log in Docker Hub (https://hub.docker.com/) and checkout the MSR image. Accept the license agreement.
-5. Log in Azure DevOps (https://dev.azure.com/). 
-6. Create a new project in Azure DevOps.
-7. In the new project, go to "Project settings" -> "GitHub connections" -> "Create a GitHub connection to the current repository" to add the webm-azure-devops repository as the source code repository.
-8. Create a service connection to the Docker Hub registry that will be used to pull the base images from Docker Hub:
+# Working with wM assets
+1. Fork this repository.
+2. Add asses on the designated place.
+3. MSR - addd packages under containers\microservices-runtime\assets\Packages directory. Add configuration template under FILL HERE. Add the webMethods Unit Tests to validate the packages in the containers\microservices-runtime\assets\Tests directory.
+4. UM - add an export of the UM real(generated from the Enterprise manager tool) under containers/universal-messaging/data/ as a file called config.xml.
+5. Log in Docker Hub (https://hub.docker.com/) and checkout the MSR image and the UM image if you're using them for the sample. Accept the license agreement. If you plan to use different 
+
+
+# Jenkins Pipeline
+
+
+
+## Azure DevOps Pipeline
+
+### Prerequisites
+1. Log in Azure DevOps (https://dev.azure.com/). 
+2. Create a new project in Azure DevOps.
+3. In the new project, go to "Project settings" -> "GitHub connections" -> "Create a GitHub connection to the current repository" to add the webm-azure-devops repository as the source code repository.
+4. Create a service connection to the Docker Hub registry that will be used to pull the base images from Docker Hub:
 - Go to "Project settings" -> "Service connection" -> "Choose Docker Registry" -> "Select Docker Hub".
 - Provide your Docker Hub credentials when prompted, but also make sure you are logged in your account on Docker Hub.
 - Give the connection a name that indicates its purpose, such as "dockerHub".
-9. Create a service connection to a target docker registry to which to push the images:
+5. Create a service connection to a target docker registry to which to push the images:
 - If you have a docker registry, follow the steps in step 8 to set up the target connection to the docker registry that you already use.
 - If you do not have a docker registry and want to use the Azure Container Registry, from "Choose Docker Registry" select "Azure Registry". For details see https://portal.azure.com/#create/hub
 
 **Note:** When connecting to an external docker registry, it takes some time for Azure to refresh the systems and show the registry created outside of Azure DevOps.
 
-## Creating and running the Azure pipeline
+### Creating and running the Azure pipeline
 1. In the Azure project, choose the action to create a new pipeline and select: 
 - GitHub YAML for your code base
 - the current repository
