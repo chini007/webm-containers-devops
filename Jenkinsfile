@@ -1,41 +1,41 @@
 pipeline {
     agent { label 'docker1' }
     parameters {
-        string(name: 'dockerComposeService', defaultValue: 'microservices-runtime', description: 'Service to be build and pushed')
-        string(name: 'targetDockerRegistryCredentials', defaultValue: '', description: 'Target docker registry credentials') 
-        string(name: 'sourceDockerRegistryCredentials', defaultValue: '', description: 'Source docker registry credentials') 
+        string(name: 'buildScenario', defaultValue: '', description: 'Asset type to be build and pushed - available options: "microservices-runtime", "universal-messaging"')
+        string(name: 'targetContainerRegistryCredentials', defaultValue: '', description: 'Target container registry credentials') 
+        string(name: 'sourceContainerRegistryCredentials', defaultValue: '', description: 'Source container registry credentials') 
 
-        string(name: 'sourceDockerRegistryHost', defaultValue: 'docker.io', description: 'Source registry host') 
-        string(name: 'sourceDockerRegistryOrg', defaultValue: 'store/softwareag', description: 'SOurce registry organization') 
-        string(name: 'sourceDockerRepoName', defaultValue: 'webmethods-microservicesruntime', description: 'Source docker repo name') 
-        string(name: 'sourceDockerRepoTag', defaultValue: '10.5.0.0', description: 'Source docker repo tag') 
+        string(name: 'sourceContainerRegistryHost', defaultValue: '', description: 'Source registry host') 
+        string(name: 'sourceContainerRegistryOrg', defaultValue: '', description: 'Source registry organization') 
+        string(name: 'sourceContainerName', defaultValue: '', description: 'Source container name') 
+        string(name: 'sourceContainerTag', defaultValue: '', description: 'Source container tag') 
 
-        string(name: 'targetDockerRegistryHost', defaultValue: 'daerepository03.eur.ad.sag:4443', description: 'Target registry host') 
-        string(name: 'targetDockerRegistryOrg', defaultValue: 'ccdevops', description: 'Target registry organization') 
-        string(name: 'targetDockerRepoName', defaultValue: 'webmethods-microservicesruntime', description: 'Target docker repo name') 
-        string(name: 'targetDockerRepoTag', defaultValue: '10.5.0.0', description: 'Target docker repo tag') 
+        string(name: 'targetContainerRegistryHost', defaultValue: '', description: 'Target registry host') 
+        string(name: 'targetContainerRegistryOrg', defaultValue: '', description: 'Target registry organization') 
+        string(name: 'targetContainerName', defaultValue: '', description: 'Target image name') 
+        string(name: 'targetContainerTag', defaultValue: '', description: 'Target image tag') 
         booleanParam(name: 'runTests', defaultValue: true, description: 'Whether to run test stage')
 
         string(name: 'testProperties', defaultValue: ' -DtestISHost=localhost -DtestObject=microservices-runtime -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DtestDir=./containers/microservices-runtime/assets/Tests', description: 'test properties')
     }
     environment {
-      REG_HOST="${params.sourceDockerRegistryHost}"
-      REG_ORG="${params.sourceDockerRegistryOrg}"
-      REPO_NAME="${params.sourceDockerRepoName}"
-      REPO_TAG="${params.sourceDockerRepoTag}"
-      TARGET_REG_HOST="${params.targetDockerRegistryHost}"
-      TARGET_REG_ORG="${params.targetDockerRegistryOrg}"
-      TARGET_REPO_NAME="${params.targetDockerRepoName}"
-      TARGET_REPO_TAG="${params.targetDockerRepoTag}"
+      REG_HOST="${params.sourceContainerRegistryHost}"
+      REG_ORG="${params.sourceContainerRegistryOrg}"
+      REPO_NAME="${params.sourceContainerName}"
+      REPO_TAG="${params.sourceContainerTag}"
+      TARGET_REG_HOST="${params.targetContainerRegistryHost}"
+      TARGET_REG_ORG="${params.targetContainerRegistryOrg}"
+      TARGET_REPO_NAME="${params.targetContainerName}"
+      TARGET_REPO_TAG="${params.targetContainerTag}"
     }
     stages {
         stage('Build') {
             steps {
                 script {
                   dir ('./containers') {
-                        docker.withRegistry("https://${params.sourceDockerRegistryHost}", "${params.sourceDockerRegistryCredentials}"){
+                        docker.withRegistry("https://${params.sourceContainerRegistryHost}", "${params.sourceContainerRegistryCredentials}"){
                             sh "docker-compose config"
-                            sh "docker-compose build ${params.dockerComposeService}"
+                            sh "docker-compose build ${params.buildScenario}"
                         }
                   }
                 }
@@ -45,8 +45,8 @@ pipeline {
             steps {
                 script {
                   dir ('./containers') {
-                        docker.withRegistry("https://${params.sourceDockerRegistryHost}", "${params.sourceDockerRegistryCredentials}"){
-                            sh "docker-compose up -d --force-recreate --remove-orphans ${params.dockerComposeService}"
+                        docker.withRegistry("https://${params.sourceContainerRegistryHost}", "${params.sourceContainerRegistryCredentials}"){
+                            sh "docker-compose up -d --force-recreate --remove-orphans ${params.buildScenario}"
                         }
                     }
                 }
@@ -71,8 +71,8 @@ pipeline {
             steps {
                 script {
                     dir ('./containers') {
-                        docker.withRegistry("https://${params.targetDockerRegistryHost}", "${params.targetDockerRegistryCredentials}"){
-                            sh "docker-compose push ${params.dockerComposeService}"
+                        docker.withRegistry("https://${params.targetContainerRegistryHost}", "${params.targetContainerRegistryCredentials}"){
+                            sh "docker-compose push ${params.buildScenario}"
                         }
                     }
                 }
