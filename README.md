@@ -12,7 +12,7 @@ The general approach is the following - the pipeline are pulling product images.
 
 # Jenkins Pipeline
 
-1. Create a jenkins pipeline that points to the Jenkins file in this git repository. You'll need separate pipelines for every type of container - MSR or UM.
+1. Create a jenkins pipeline that points to the Jenkins file in this git repository.In a Jenkins project choose the option "Pipelinescript from SCM". You'll need separate pipelines for every type of container - MSR or UM.
 2. Run the pipeline once to checkout the metadata.
 3. Go and define in Jenkins your credentials for connection with the source and the target repository. Note the aliases as they would be used in the next steps.
 4. Configure the parameters to build a desired solution
