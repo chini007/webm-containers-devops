@@ -18,25 +18,25 @@ The general approach is the following - the pipeline are pulling product images.
 4. Configure the parameters to build a desired solution
   - `buildScenario` chose which container to to build with assets. The available options are "microservices-runtime" and "universal-messaging"
 
-  - `targetContainerRegistryCredentials`  Provide target container registry credential alias that you've defined in the previous step.
+  - `targetImageRegistryCredentials`  Provide target image registry credential alias that you've defined in the previous step.
   
-  - `sourceContainerRegistryCredentials`  Provide source container registry credential alias that you've defined in the previous step.
+  - `sourceImageRegistryCredentials`  Provide source image registry credential alias that you've defined in the previous step.
   
-  - `sourceContainerRegistryHost` Provide the source registry host. Example 'docker.io'
+  - `sourceImageRegistryHost` Provide the source image registry host. Example 'docker.io'
   
-  - `sourceContainerRegistryOrg` Provide the source registry organization. Example 'store/softwareag'
+  - `sourceImageRegistryOrg` Provide the source image registry organization. Example 'store/softwareag'
   
-  - `sourceContainerName` Provide source container name. Example 'universalmessaging-server'
+  - `sourceImageName` Provide source container name. Example 'universalmessaging-server'
   
-  - `sourceContainerTag` ProvideSource container tag. Example '10.5.0.4'
+  - `sourceImageTag` Provide source image tag. Example '10.5.0.4'
   
-  - `targetContainerRegistryHost` Provide target registry host. Example 'docker.io'
+  - `targetImageRegistryHost` Provide target image registry host. Example 'docker.io'
   
-  - `targetContainerRegistryOrg` Provide target registry organization. Example 'myorg/mysolution'
+  - `targetImageRegistryOrg` Provide target image registry organization. Example 'myorg/mysolution'
   
-  - `targetContainerName` Provide target image name. Example "um_integration"
+  - `targetImageName` Provide target image name. Example "um_integration"
   
-  - `targetContainerTag` Provide target image tag. Example "v1"
+  - `targetImageTag` Provide target image tag. Example "v1"
   
   - `runTests` Define whether to run test stage for your containers. This is valuable with MSR, where you can create and put tests that will test the solution image in isolation. We have not way to test UM assets. The default value is "true". Jenkins renders it as a checkbox.
   
