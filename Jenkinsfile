@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'docker1' }
+    agent any
     parameters {
         string(name: 'buildScenario', defaultValue: '', description: 'Asset type to be build and pushed - available options: "microservices-runtime", "universal-messaging"')
         string(name: 'targetImageRegistryCredentials', defaultValue: '', description: 'Target image registry credentials') 
