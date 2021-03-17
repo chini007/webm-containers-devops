@@ -60,7 +60,7 @@ pipeline {
             }
             steps {
                 script {
-                    sh "/opt/apache-ant-1.9.15/bin/ant -file build.xml test ${params.testProperties}" 
+                    sh "ant -file build.xml test ${params.testProperties}" 
                 }
                 dir('./report') {
                     junit '*.xml'
