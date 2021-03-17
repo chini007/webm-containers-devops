@@ -4,26 +4,26 @@
 	<property name="testSuitePackagesPath" value="${testDir}"/>
 	
 	<property name="ivy.install.version" value="2.1.0-rc2" />
-    <property name="ivy.home" value="${user.home}/.ant" />
-    <property name="ivy.jar.dir" value="${ivy.home}/lib" />
-    <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
+        <property name="ivy.home" value="${user.home}/.ant" />
+        <property name="ivy.jar.dir" value="${ivy.home}/lib" />
+        <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
 
-    <target name="download-ivy" unless="offline">
-        <mkdir dir="${ivy.jar.dir}"/>
-        <get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/maven-metadata.xml" dest="${basedir}/maven-metadata.xml"/>
-        <xmlproperty file="${basedir}/maven-metadata.xml" keepRoot="false"
-             semanticAttributes="true"/>
-        <echo message="latest ivy version is: ${versioning.latest}"/>
-        <get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${versioning.latest}/ivy-${versioning.latest}.jar"
-             dest="${ivy.jar.file}" usetimestamp="true"/>
-    </target>
+	<target name="download-ivy" unless="offline">
+		<mkdir dir="${ivy.jar.dir}"/>
+		<get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/maven-metadata.xml" dest="${basedir}/maven-metadata.xml"/>
+		<xmlproperty file="${basedir}/maven-metadata.xml" keepRoot="false"
+		     semanticAttributes="true"/>
+		<echo message="latest ivy version is: ${versioning.latest}"/>
+		<get src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/${versioning.latest}/ivy-${versioning.latest}.jar"
+		     dest="${ivy.jar.file}" usetimestamp="true"/>
+    	</target>
 
-    <target name="init-ivy" depends="download-ivy">
-        <path id="ivy.lib.path">
-            <fileset dir="${ivy.jar.dir}" includes="*.jar"/>
-        </path>
-        <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
-    </target>
+	<target name="init-ivy" depends="download-ivy">
+		<path id="ivy.lib.path">
+	    		<fileset dir="${ivy.jar.dir}" includes="*.jar"/>
+		</path>
+		<taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
+	</target>
 	
 	<target name="ivy-retrieve-artifacts" description="Retrieve artifacts" depends="init-ivy">
 		<property name="ivy.lib.dir" value="./lib"/>
@@ -33,40 +33,36 @@
 	</target>
 
 	<target name="prepareTest" >
-	
-	  <antcall target="ivy-retrieve-artifacts"/>
+		<antcall target="ivy-retrieve-artifacts"/>
 	  
-	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
+  		<exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
 			<arg value="-c" />
 			<arg value="docker cp $( docker ps -q ):/opt/softwareag/common/lib/ext/enttoolkit.jar ../../lib" />
-	  </exec>
+  		</exec>
 	  
-	  	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
+  		<exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
 			<arg value="-c" />
 			<arg value="docker cp  $( docker ps -q ):/opt/softwareag/common/lib/glassfish/gf.jakarta.mail.jar ../../lib" />
-	  </exec>
+  		</exec>
 	  
-	  	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
+  		<exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
 			<arg value="-c" />
 			<arg value="docker cp $( docker ps -q ):/opt/softwareag/common/lib/wm-isclient.jar ../../lib" />
-	  </exec>
+		</exec>
 	  
-	  	  <exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
+		<exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
 			<arg value="-c" />
 			<arg value="docker cp $( docker ps -q ):/opt/softwareag/IntegrationServer/lib/wm-isserver.jar ../../lib" />
-	  </exec>
+		</exec>
 	  
-	
-	  <waitfor maxwait="3" maxwaitunit="minute" checkevery="500">
-	    <http url="https://${testISHost}:${testISPort}"/>
-      </waitfor>
-		
+
+		<waitfor maxwait="3" maxwaitunit="minute" checkevery="500">
+			<http url="https://${testISHost}:${testISPort}"/>
+		</waitfor>
 	</target>	
 	
 	
 	<target name="startTest" depends="prepareTest" >		
-	  
-	  
 	  <var name="failedTestList" value=""/>
 		
             <!-- interate over the test project and triiger all xml tests in the setup folder -->
@@ -91,9 +87,6 @@
 			</sequential>
 		</for>
 
-
-
-		
 		<if>
 			<not>
 				<equals arg1="${failedTestList}" arg2="" trim="true" />
@@ -176,9 +169,6 @@
 
 		<fail if="test:failure">Unit test failure</fail>
 	</target>
-
-
-
 
 
 	<!-- if jenkins report dir is set publicate results there-->
