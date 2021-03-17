@@ -1,7 +1,6 @@
 pipeline {
     agent any
-    def testsDir = "./containers/microservices-runtime/assets/Tests"
-    
+   
     parameters {
         string(name: 'buildScenario', defaultValue: 'microservices-runtime', description: 'Asset type to be build and pushed - available options: "microservices-runtime", "universal-messaging"')
         string(name: 'sourceImageRegistryCredentials', defaultValue: '', description: 'Source image registry credentials') 
@@ -69,6 +68,7 @@ pipeline {
             }
             steps {
                 script {
+                    def testsDir = "./containers/microservices-runtime/assets/Tests"
                     sh "ant -file build.xml test -DtestISHost=${testContainerHost} -DtestISPort=${testContainerPort} -DtestObject=${params.buildScenario} -DtestDir=${testsDir} ${params.testProperties}" 
                 }
                 dir('./report') {
