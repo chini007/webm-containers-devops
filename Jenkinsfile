@@ -29,6 +29,8 @@ pipeline {
       REG_ORG="${params.sourceImageRegistryOrg}"
       REPO_NAME="${params.sourceImageName}"
       REPO_TAG="${params.sourceImageTag}"
+      TEST_CONTAINER_HOST="${params.testContainerHost}"
+      TEST_CONTAINER_PORT="${params.testContainerPort}"
       TARGET_REG_HOST="${params.targetImageRegistryHost}"
       TARGET_REG_ORG="${params.targetImageRegistryOrg}"
       TARGET_REPO_NAME="${params.targetImageName}"
