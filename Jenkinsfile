@@ -67,6 +67,15 @@ pipeline {
                 }
             }
         }
+        stage('Stop') {
+            steps {
+                script {
+                  dir ('./containers') {
+                        sh "docker-compose stop ${params.buildScenario}"
+                    }
+                }
+            }
+        }
         stage("Push") {
             steps {
                 script {
