@@ -20,7 +20,7 @@ version: "3.2"
 
 services:
   microservices-runtime:
-    container_name: msr-$BUILD_TAG:-msrtest
+    container_name: ${BUILD_TAG:-msrtest}
     image: ${TARGET_REG_HOST}/${TARGET_REG_ORG}/${TARGET_REPO_NAME}:${TARGET_REPO_TAG}
     build:
       context: microservices-runtime/
