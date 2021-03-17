@@ -20,6 +20,7 @@ version: "3.2"
 
 services:
   microservices-runtime:
+    container_name: msrtest
     image: ${TARGET_REG_HOST}/${TARGET_REG_ORG}/${TARGET_REPO_NAME}:${TARGET_REPO_TAG}
     build:
       context: microservices-runtime/
@@ -30,6 +31,7 @@ services:
       - 5555:5555                            # container specific ports 1
     hostname: microservices-runtime
   universal-messaging:
+    container_name: umtest
     image: ${TARGET_REG_HOST}/${TARGET_REG_ORG}/${TARGET_REPO_NAME}:${TARGET_REPO_TAG}
     build:
       context: universal-messaging/
