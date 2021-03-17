@@ -28,7 +28,7 @@ services:
         - PRODUCT_IMAGE=${REG_HOST:-docker.io}/${REG_ORG:-store/softwareag}/${REPO_NAME:-webmethods-microservicesruntime}:${REPO_TAG:-10.5.0.0}
         - BASE_IMAGE=centos:8
     ports:
-      - 5555:5555                            # container specific ports 1
+      - ${TEST_CONTAINER_PORT:-5555}:5555                            # container specific ports 1
     hostname: microservices-runtime
   universal-messaging:
     container_name: ${BUILD_TAG:-umtest}
@@ -39,7 +39,7 @@ services:
         - PRODUCT_IMAGE=${REG_HOST:-docker.io}/${REG_ORG:-store/softwareag}/${REPO_NAME:-universalmessaging-server}:${REPO_TAG:-10.5.0.0}
         - BASE_IMAGE=centos:8
     ports:
-      - 9000:9000                            # container specific ports
+      - ${TEST_CONTAINER_PORT:-9000}:9000                            # container specific ports
     hostname: universal-messaging
 
 
