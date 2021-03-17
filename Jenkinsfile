@@ -1,19 +1,19 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'buildScenario', defaultValue: '', description: 'Asset type to be build and pushed - available options: "microservices-runtime", "universal-messaging"')
-        string(name: 'targetImageRegistryCredentials', defaultValue: '', description: 'Target image registry credentials') 
+        string(name: 'buildScenario', defaultValue: 'microservices-runtime', description: 'Asset type to be build and pushed - available options: "microservices-runtime", "universal-messaging"')
         string(name: 'sourceImageRegistryCredentials', defaultValue: '', description: 'Source image registry credentials') 
 
-        string(name: 'sourceImageRegistryHost', defaultValue: '', description: 'Source registry host') 
-        string(name: 'sourceImageRegistryOrg', defaultValue: '', description: 'Source registry organization') 
-        string(name: 'sourceImageName', defaultValue: '', description: 'Source image name') 
-        string(name: 'sourceImageTag', defaultValue: '', description: 'Source image tag') 
+        string(name: 'sourceImageRegistryHost', defaultValue: 'docker.io', description: 'Source registry host') 
+        string(name: 'sourceImageRegistryOrg', defaultValue: 'store/softwareag', description: 'Source registry organization') 
+        string(name: 'sourceImageName', defaultValue: 'webmethods-microservicesruntime', description: 'Source image name') 
+        string(name: 'sourceImageTag', defaultValue: '10.5', description: 'Source image tag') 
 
+        string(name: 'targetImageRegistryCredentials', defaultValue: '', description: 'Target image registry credentials') 
         string(name: 'targetImageRegistryHost', defaultValue: '', description: 'Target image registry host') 
         string(name: 'targetImageRegistryOrg', defaultValue: '', description: 'Target image registry organization') 
-        string(name: 'targetImageName', defaultValue: '', description: 'Target image name') 
-        string(name: 'targetImageTag', defaultValue: '', description: 'Target image tag') 
+        string(name: 'targetImageName', defaultValue: '', description: 'Target image name. Small caps only.') 
+        string(name: 'targetImageTag', defaultValue: '', description: 'Target image tag. A tag name must be valid ASCII and may contain lowercase and uppercase letters, digits, underscores, periods and dashes. A tag name may not start with a period or a dash and may contain a maximum of 128 characters.') 
         booleanParam(name: 'runTests', defaultValue: true, description: 'Whether to run test stage')
 
         string(name: 'testProperties', defaultValue: ' -DtestISHost=localhost -DtestObject=microservices-runtime -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DtestDir=./containers/microservices-runtime/assets/Tests', description: 'test properties')
