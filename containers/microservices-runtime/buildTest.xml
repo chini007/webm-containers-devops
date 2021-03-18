@@ -33,11 +33,17 @@
 	</target>
 
 	<target name="prepareTest" >
+		<!-- download test classpath jars from maven repository. Use ivy for this -->
 		<antcall target="ivy-retrieve-artifacts"/>
+		
+		<condition property="containerName" value="${BUILD_TAG}" else="msrtest">
+    			<isset property="BUILD_TAG" />
+		</condition>
 	  
+                <!-- the WMTestSuite class path requires wm libraries. To avoid updating those with every version, we just copy them out the container. -->		
   		<exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
 			<arg value="-c" />
-			<arg value="docker cp ${BUILD_TAG}:/opt/softwareag/common/lib/ext/enttoolkit.jar ../../lib" />
+			<arg value="docker cp ${containerName}:/opt/softwareag/common/lib/ext/enttoolkit.jar ../../lib" />
   		</exec>
 	  
   		<exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
