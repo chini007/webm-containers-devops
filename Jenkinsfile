@@ -54,9 +54,9 @@ pipeline {
             steps {
                 script {
                   dir ('./containers') {
-                        docker.withRegistry("https://${params.sourceImageRegistryHost}", "${params.sourceImageRegistryCredentials}"){
-                            sh "docker-compose up -d --force-recreate --remove-orphans ${params.buildScenario}"
-                        }
+                      sh "docker-compose up -d --force-recreate --remove-orphans ${params.buildScenario}"
+                        //docker.withRegistry("https://${params.sourceImageRegistryHost}", "${params.sourceImageRegistryCredentials}"){
+                        //}
                     }
                 }
             }
