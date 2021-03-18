@@ -3,10 +3,10 @@ pipeline {
    
     parameters {
         string(name: 'buildScenario', defaultValue: 'microservices-runtime', description: 'Asset type to be build and pushed - available options: "microservices-runtime", "universal-messaging"')
-        string(name: 'sourceImageRegistryCredentials', defaultValue: '', description: 'Source image registry credentials') 
+        string(name: 'sourceContainerRegistryCredentials', defaultValue: '', description: 'Source container registry credentials') 
 
-        string(name: 'sourceImageRegistryHost', defaultValue: 'docker.io', description: 'Source registry host. Default points to docker store.') 
-        string(name: 'sourceImageRegistryOrg', defaultValue: 'store/softwareag', description: 'Source registry organization. Default points to SoftwareAG organization at docker store.') 
+        string(name: 'sourceContainerRegistryHost', defaultValue: 'docker.io', description: 'Source registry host. Default points to docker store.') 
+        string(name: 'sourceContainerRegistryOrg', defaultValue: 'store/softwareag', description: 'Source registry organization. Default points to SoftwareAG organization at docker store.') 
         string(name: 'sourceImageName', defaultValue: 'webmethods-microservicesruntime', description: 'Source image name. Sample values from docker hub - "webmethods-microservicesruntime" and "universalmessaging-server". Check here fo all available in docker store https://hub.docker.com/search?q=softwareag&type=image&image_filter=store') 
         string(name: 'sourceImageTag', defaultValue: '10.5', description: 'Source image tag. For available version check the Softwareag section at docker store.') 
 
@@ -14,9 +14,9 @@ pipeline {
         string(name: 'testContainerHost', defaultValue: 'localhost', description: 'Host where the test container will be exposed') 
         string(name: 'testContainerPort', defaultValue: '5555', description: 'Port under which the test container will be reachable - e.g. 5555 or 9000. If multiple parallel pipelines are being executed, define different ports to avoid conflict on the host system - e.g. 5556, 5557, 5558.')       
         
-        string(name: 'targetImageRegistryCredentials', defaultValue: '', description: 'Target image registry credentials') 
-        string(name: 'targetImageRegistryHost', defaultValue: '', description: 'Target image registry host') 
-        string(name: 'targetImageRegistryOrg', defaultValue: '', description: 'Target image registry organization') 
+        string(name: 'targetContainerRegistryCredentials', defaultValue: '', description: 'Target container registry credentials') 
+        string(name: 'targetContainerRegistryHost', defaultValue: '', description: 'Target container registry host') 
+        string(name: 'targetContainerRegistryOrg', defaultValue: '', description: 'Target container registry organization') 
         string(name: 'targetImageName', defaultValue: '', description: 'Target image name. Small caps only.') 
         string(name: 'targetImageTag', defaultValue: '', description: 'Target image tag. A tag name must be valid ASCII and may contain lowercase and uppercase letters, digits, underscores, periods and dashes. A tag name may not start with a period or a dash and may contain a maximum of 128 characters.') 
         booleanParam(name: 'runTests', defaultValue: true, description: 'Whether to run test stage')
@@ -24,14 +24,14 @@ pipeline {
         string(name: 'testProperties', defaultValue: ' -DtestISUsername=Administrator -DtestISPassword=manage', description: 'test properties. The default are covering the IS test case.')
     }
     environment {
-      REG_HOST="${params.sourceImageRegistryHost}"
-      REG_ORG="${params.sourceImageRegistryOrg}"
+      REG_HOST="${params.sourceContainerRegistryHost}"
+      REG_ORG="${params.sourceContainerRegistryOrg}"
       REPO_NAME="${params.sourceImageName}"
       REPO_TAG="${params.sourceImageTag}"
       TEST_CONTAINER_HOST="${params.testContainerHost}"
       TEST_CONTAINER_PORT="${params.testContainerPort}"
-      TARGET_REG_HOST="${params.targetImageRegistryHost}"
-      TARGET_REG_ORG="${params.targetImageRegistryOrg}"
+      TARGET_REG_HOST="${params.targetContainerRegistryHost}"
+      TARGET_REG_ORG="${params.targetContainerRegistryOrg}"
       TARGET_REPO_NAME="${params.targetImageName}"
       TARGET_REPO_TAG="${params.targetImageTag}"
     }
@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                   dir ('./containers') {
-                        docker.withRegistry("https://${params.sourceImageRegistryHost}", "${params.sourceImageRegistryCredentials}"){
+                        docker.withRegistry("https://${params.sourceContainerRegistryHost}", "${params.sourceContainerRegistryCredentials}"){
                             sh "docker-compose config"
                             sh "docker-compose build ${params.buildScenario}"
                         }
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 script {
                   dir ('./containers') {
-                        docker.withRegistry("https://${params.sourceImageRegistryHost}", "${params.sourceImageRegistryCredentials}"){
+                        docker.withRegistry("https://${params.sourceContainerRegistryHost}", "${params.sourceContainerRegistryCredentials}"){
                             sh "docker-compose up -d --force-recreate --remove-orphans ${params.buildScenario}"
                         }
                     }
@@ -90,7 +90,7 @@ pipeline {
             steps {
                 script {
                     dir ('./containers') {
-                        docker.withRegistry("https://${params.targetImageRegistryHost}", "${params.targetImageRegistryCredentials}"){
+                        docker.withRegistry("https://${params.targetContainerRegistryHost}", "${params.targetContainerRegistryCredentials}"){
                             sh "docker-compose push ${params.buildScenario}"
                         }
                     }
