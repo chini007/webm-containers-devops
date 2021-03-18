@@ -53,17 +53,22 @@
 		<exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
 			<arg value="-c" />
 			<arg value="docker cp $( docker ps -q ):/opt/softwareag/IntegrationServer/lib/wm-isserver.jar ../../lib" />
-		</exec>
-	  
+		</exec>  
+	</target>
 
+        <target name="waitForContainerToStart">
+		<echo message="Wait for container on https://${testISHost}:${testISPort} to start."/>
 		<waitfor maxwait="3" maxwaitunit="minute" checkevery="500">
 			<http url="https://${testISHost}:${testISPort}"/>
+			   <credentials username="${testISUsername}" password="${testISPassword}"/>
+			</http>
 		</waitfor>
-	</target>	
+	        <echo message="Container on https://${testISHost}:${testISPort} started"/>
+	</target>
 	
 	
-	<target name="startTest" depends="prepareTest" >		
-	  <var name="failedTestList" value=""/>
+	<target name="startTest" depends="prepareTest,waitForContainerToStart" >		
+	    <var name="failedTestList" value=""/>
 		
             <!-- interate over the test project and triiger all xml tests in the setup folder -->
             <for param="testProject" keepgoing="true" trim="true">
@@ -73,7 +78,7 @@
 			<sequential>
 				<trycatch reference="exception_ref">
 					<try>
-                        <echo message="@{testProject}"/>
+                       				<echo message="@{testProject}"/>
 						<antcall target="junitTestAndReportXML">
 							<param name="testPackageName" value="@{testProject}" />
 						</antcall>
