@@ -7,12 +7,12 @@ pipeline {
 
         string(name: 'sourceImageRegistryHost', defaultValue: 'docker.io', description: 'Source registry host') 
         string(name: 'sourceImageRegistryOrg', defaultValue: 'store/softwareag', description: 'Source registry organization') 
-        string(name: 'sourceImageName', defaultValue: 'webmethods-microservicesruntime', description: 'Source image name') 
+        string(name: 'sourceImageName', defaultValue: 'webmethods-microservicesruntime', description: 'Source image name. Sample values from docker hub - "webmethods-microservicesruntime" and "universalmessaging-server". Check here fo all available in docker store https://hub.docker.com/search?q=softwareag&type=image&image_filter=store') 
         string(name: 'sourceImageTag', defaultValue: '10.5', description: 'Source image tag') 
 
         
         string(name: 'testContainerHost', defaultValue: 'localhost', description: 'Host where the test container will be exposed') 
-        string(name: 'testContainerPort', defaultValue: '5555', description: 'Port under which the test container will be reachable')       
+        string(name: 'testContainerPort', defaultValue: '5555', description: 'Port under which the test container will be reachable - e.g. 5555 or 9000. If multiple parallel pipelines are being executed, define different ports to avoid conflict on the host system - e.g. 5556, 5557, 5558.')       
         
         string(name: 'targetImageRegistryCredentials', defaultValue: '', description: 'Target image registry credentials') 
         string(name: 'targetImageRegistryHost', defaultValue: '', description: 'Target image registry host') 
