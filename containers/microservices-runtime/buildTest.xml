@@ -63,12 +63,12 @@
 	</target>
 
         <target name="waitForContainerToStart">
-		<echo message="Wait for container on http://${testISHost}:${testISPort} to start."/>
+		<echo message="Wait for server on http://${testISHost}:${testISPort} to start."/>
 		<waitfor maxwait="3" maxwaitunit="minute" checkevery="500">
 			<!-- the servers requires athentication and always returns 401. This methods does not support basic auth and can be replaced with socker -->
 			<http url="http://${testISHost}:${testISPort}" errorsBeginAt="500"/>
 		</waitfor>
-	        <echo message="Container on http://${testISHost}:${testISPort} started"/>
+	        <echo message="Server on http://${testISHost}:${testISPort} started"/>
 	</target>
 	
 	
