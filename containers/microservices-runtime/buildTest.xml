@@ -40,6 +40,8 @@
     			<isset property="TEST_CONTAINER_NAME" />
 		</condition>
 	  
+		
+		<echo message="Copy jars from container ${testContainerName}"/>
                 <!-- the WMTestSuite class path requires wm libraries. To avoid updating those with every version, we just copy them out the container. -->		
   		<exec dir="${basedir}/containers/microservices-runtime" executable="/bin/bash" osfamily="unix" vmlauncher="false" failonerror="true" >
 			<arg value="-c" />
