@@ -34,7 +34,7 @@ pipeline {
       TARGET_REG_ORG="${params.targetContainerRegistryOrg}"
       TARGET_REPO_NAME="${params.targetImageName}"
       TARGET_REPO_TAG="${params.targetImageTag}"
-      TEST_IMAGE_NAME="${BUILD_TAG}"  
+      TEST_CONTAINER_NAME="${BUILD_TAG}"  
     }
     
     
