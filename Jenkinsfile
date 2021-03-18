@@ -71,7 +71,7 @@ pipeline {
             steps {
                 script {
                     def testsDir = "./containers/microservices-runtime/assets/Tests"
-                    sh "ant -file build.xml test -DtestISHost=${testContainerHost} -DtestISPort=${testContainerPort} -DtestObject=${params.buildScenario} -DtestDir=${testsDir} ${params.testProperties}" 
+                    sh "ant -file build.xml test -DtestISHost=${testContainerHost} -DtestISPort=${testContainerPort} -DtestObject=${params.buildScenario} -DtestDir=${testsDir} -DtestContainerName=${TEST_CONTAINER_NAME} ${params.testProperties}" 
                 }
                 dir('./report') {
                     junit '*.xml'
