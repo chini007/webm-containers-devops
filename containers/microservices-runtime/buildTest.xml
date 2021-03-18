@@ -59,9 +59,7 @@
         <target name="waitForContainerToStart">
 		<echo message="Wait for container on https://${testISHost}:${testISPort} to start."/>
 		<waitfor maxwait="3" maxwaitunit="minute" checkevery="500">
-			<http url="https://${testISHost}:${testISPort}">
-			   <credentials username="${testISUsername}" password="${testISPassword}"/>
-			</http>
+			<http url="https://${testISHost}:${testISPort}" authtype="basic" username="${testISUsername}" password="${testISPassword}"/>
 		</waitfor>
 	        <echo message="Container on https://${testISHost}:${testISPort} started"/>
 	</target>
