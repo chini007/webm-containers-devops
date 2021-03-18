@@ -12,27 +12,34 @@ The general approach is the following - the pipeline are pulling product images.
 
 # Jenkins Pipeline
 
+## Prepare Jenkins
+1. Run jenkins on linux. The samples are not adjusted for windows.
+2. Have docker installed locally. Install ant. Both tools should be reachable via $PATH.
+3. Set up jenkins to run from your home directory.
+4. Install the "Docker Pipeline" plugin from the Jenkins plug-in manager. Restart Jenkins.
+
+## Set up the pipeline
 1. Create a jenkins pipeline that points to the Jenkins file in this git repository.In a Jenkins project choose the option "Pipelinescript from SCM". You'll need separate pipelines for every type of container - MSR or UM.
 2. Run the pipeline once to checkout the metadata.
-3. Go and define in Jenkins your credentials for connection with the source and the target repository. Note the aliases as they would be used in the next steps.
+3. Define your credentials for connection with the source and the target container repository in the global Jenkins credential story - Dashboard-> Manage Jenkins -> Credentials. Note the credential aliases as they would be used in the next steps.
 4. Configure the parameters to build a desired solution
   - `buildScenario` chose which container to to build with assets. The available options are "microservices-runtime" and "universal-messaging"
 
-  - `targetImageRegistryCredentials`  Provide target image registry credential alias that you've defined in the previous step.
+  - `sourceContainerRegistryCredentials` Provide source container registry credential alias that you've defined in the previous step.
   
-  - `sourceImageRegistryCredentials`  Provide source image registry credential alias that you've defined in the previous step.
+  - `sourceContainerRegistryHost` Provide the source container registry host. Example 'docker.io'
   
-  - `sourceImageRegistryHost` Provide the source image registry host. Example 'docker.io'
-  
-  - `sourceImageRegistryOrg` Provide the source image registry organization. Example 'store/softwareag'
+  - `sourceContainerRegistryOrg` Provide the source container registry organization. Example 'store/softwareag'
   
   - `sourceImageName` Provide source container name. Example 'universalmessaging-server'
   
   - `sourceImageTag` Provide source image tag. Example '10.5.0.4'
+
+  - `targetContainerRegistryCredentials`  Provide target container registry credential alias that you've defined in the previous step.
   
-  - `targetImageRegistryHost` Provide target image registry host. Example 'docker.io'
+  - `targetContainerRegistryHost` Provide target container registry host. Example 'docker.io'
   
-  - `targetImageRegistryOrg` Provide target image registry organization. Example 'myorg/mysolution'
+  - `targetContainerRegistryOrg` Provide target container registry organization. Example 'myorg/mysolution'
   
   - `targetImageName` Provide target image name. Example "um_integration"
   
