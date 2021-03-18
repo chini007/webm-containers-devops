@@ -36,8 +36,8 @@
 		<!-- download test classpath jars from maven repository. Use ivy for this -->
 		<antcall target="ivy-retrieve-artifacts"/>
 		
-		<condition property="testContainerName" value="${TEST_CONTAINER_NAME}" else="msrtest">
-    			<isset property="TEST_CONTAINER_NAME" />
+		<condition property="testContainerName" value="${env.TEST_CONTAINER_NAME}" else="msrtest">
+    			<isset property="env.TEST_CONTAINER_NAME" />
 		</condition>
 	  
 		
