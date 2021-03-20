@@ -1,11 +1,17 @@
 variables:
   dockerComposeService: 'microservices-runtime'
   
+  targetDockerRegistryConnection: 'dockehub'
+  targetDockerRegistryHost: 'docker.io'
+  targetDockerRegistryOrg: 'achoo'
+  targetDockerRepoName: 'msrazuresol'
+  targetDockerRepoTag:  'v1'
+
   sourceDockerRegistryConnection: 'dockehub'
   sourceDockerRegistryHost:  'docker.io'
   sourceDockerRegistryOrg: 'store/softwareag'
   sourceDockerRepoName: 'webmethods-microservicesruntime'
-  sourceDockerRepoTag: '10.5.0.0'
+  sourceDockerRepoTag: '10.5'
 
   testDir: './containers/microservices-runtime/assets/Tests'
   testProperties: ' -DtestISHost=localhost -DtestObject=$(dockerComposeService) -DtestISPort=5555 -DtestISUsername=Administrator -DtestISPassword=manage -DtestDir=$(testDir)'
