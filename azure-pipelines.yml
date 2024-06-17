@@ -9,7 +9,7 @@ variables:
 
   sourceDockerRegistryConnection: 'SAG_CR'
   sourceDockerRegistryHost:  'sagcr.azurecr.io'
-  sourceDockerRegistryOrg: ''
+  sourceDockerRegistryOrg: ' '
   sourceDockerRepoName: 'webmethods-microservicesruntime'
   sourceDockerRepoTag: '10.5'
 
