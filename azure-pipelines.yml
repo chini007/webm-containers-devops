@@ -7,9 +7,9 @@ variables:
   targetDockerRepoName: 'msrazuresol'
   targetDockerRepoTag:  'v1'
 
-  sourceDockerRegistryConnection: 'DockerHub'
-  sourceDockerRegistryHost:  'docker.io'
-  sourceDockerRegistryOrg: 'store/softwareag'
+  sourceDockerRegistryConnection: 'SAG_CR'
+  sourceDockerRegistryHost:  'sagcr.azurecr.io'
+  sourceDockerRegistryOrg: ''
   sourceDockerRepoName: 'webmethods-microservicesruntime'
   sourceDockerRepoTag: '10.5'
 
