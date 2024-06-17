@@ -25,7 +25,7 @@ services:
     build:
       context: microservices-runtime/
       args:
-        - PRODUCT_IMAGE=${REG_HOST:-docker.io}/${REG_ORG:-store/softwareag}/${REPO_NAME:-webmethods-microservicesruntime}:${REPO_TAG:-10.5.0.0}
+        - PRODUCT_IMAGE=${REG_HOST:-docker.io}/${REPO_NAME:-webmethods-microservicesruntime}:${REPO_TAG:-10.5.0.0}
         - BASE_IMAGE=centos:8
     ports:
       - ${TEST_CONTAINER_PORT:-5555}:5555                            # container specific ports 1
